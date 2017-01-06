@@ -7,7 +7,9 @@
 #include <vector>
 #include "cpxmacro.h"
 #include <time.h>
+#include <sys/time.h>
 #include <stdio.h>
+#include <cmath>
 
 #define VERBOSE
 
@@ -31,13 +33,13 @@ char name[NAME_SIZE];
  * @param N
  * @param MAX_COST
  */	
-void setupLP(CEnv env, Prob lp, int * numVars, int N, vector< vector<int> > C)
+void setupLP(CEnv env, Prob lp, int * numVars, int N, vector< vector<int> > C, vector< vector<int> > & mapY)
 {	
 	
 	int current_var_position 	= 0;
 	/* Initialize three 2 dimensional vectors mapX, mapY, C */
 	vector< vector<int> > mapX(N, vector<int> (N));
-	vector< vector<int> > mapY(N, vector<int> (N));
+	//vector< vector<int> > mapY(N, vector<int> (N));
 
 	
 	
@@ -201,31 +203,60 @@ void setupLP(CEnv env, Prob lp, int * numVars, int N, vector< vector<int> > C)
 /**
  * solve the model write the result in a file and returns the return value of the function
  */
-double solve( CEnv env, Prob lp, int N) {
+double solve( CEnv env, Prob lp, int N, vector< vector<int> > mapY) {
+	clock_t t1,t2;
+    t1 = clock();
+    struct timeval  tv1, tv2;
+    gettimeofday(&tv1, NULL);
+	
 	CHECKED_CPX_CALL( CPXmipopt, env, lp );
+	t2 = clock();
+    gettimeofday(&tv2, NULL);
 	double objval = 0.0;
 	CHECKED_CPX_CALL( CPXgetobjval, env, lp, &objval );
-	cout << "Objval: " << objval << endl;
-	CHECKED_CPX_CALL( CPXsolwrite, env, lp, "Model.sol" );
-	#ifdef VERBOSE 
-	int n = CPXgetnumcols(env, lp);
-	int expected = 2*(N*N - N);
-	if(expected != n) {
-		throw runtime_error(std::string(__FILE__) + ":" + STRINGIZE(__LINE__) + ": " + "different number of variables" + string("" + n) + "vs "+  string("" + expected));
+	cout << "Objval: " << (objval/100) << endl;
+	//CHECKED_CPX_CALL( CPXsolwrite, env, lp, "Model.sol" );
+	int begin =  mapY[0][1]; //First y index
+	int end = mapY[N-1][N-2]; //Last y index
+	int length = end - begin + 1;
+	double * y = (double *) malloc(sizeof(double) * length);
+	CHECKED_CPX_CALL( CPXgetx, env, lp, y, begin, end);
+	cout << "OPTIMAL SOLUTION = ";
+	int k = 0;
+	
+	for(int i = 1; i < N; i++){
+		
+		if(rint(y[i-1]) == 1.0){
+			k = i;
+			cout << "0" << " " << k << " ";
+			break;
+		}
 	}
-	vector<double> varVals(n);
-	CHECKED_CPX_CALL(CPXgetx, env, lp, &varVals[0], 0, n-1);
 	
-	vector< vector<double> > resX(n, vector<double>(N));
+	int counter = 0;
+	while(k != 0 && counter < N+2) {
+		counter++;
+		int start_index = k*N - k;
+		for(int i = 0; i < N; i++){
+			if(k == i) {
+				start_index-=1;
+				continue;
+			}
+			if(round(y[start_index+i]) == 1.0){
+				k = i;
+				cout << k << " ";
+				break;
+			}
+		}
+		
+	}
 	
+	cout << endl;
 	
+	free(y);
+	cout << "in " << (double)(tv2.tv_sec+tv2.tv_usec*1e-6 - (tv1.tv_sec+tv1.tv_usec*1e-6)) << " seconds (user time)\n";
+    cout << "in " << (double)(t2-t1) / CLOCKS_PER_SEC << " seconds (CPU time)\n";
 	
-	
-	
-	/*for(int i = 0; i < n; ++i){
-		cout << "var " << i << "=" << varVals[i] << endl;
-	}*/
-	#endif
 	return objval;
 }
 
@@ -235,9 +266,10 @@ vector< vector<int> > readFile(const char * filename){
 	int N = strtol(name, NULL, 0);
 	vector< vector<int> > C(N, vector<int> (N));
 	for(int i = 0; i < N; i++){
-		
+		double tmp;
 		for(int j = 0; j < N; j++){
-			fscanf(infile, "%d ", &C[i][j]);
+			fscanf(infile, "%lf ", &tmp);
+			C[i][j] = (int) (tmp * 100);
 		}
 	}
 	return C;
@@ -280,13 +312,14 @@ int main (int argc, char const *argv[])
 		//In order to enable "random" generation of numbers
 		vector< vector<int> > C = get_command_line_parameters(argc, argv);	
 		int N = C.size();
+		vector< vector<int> > mapY(N, vector<int> (N));
 		cout << "Size of problem: " << N << endl;
 		DECL_ENV( env );
 		DECL_PROB( env, lp );
 		int numVars;
-		setupLP(env, lp, &numVars, N, C);
+		setupLP(env, lp, &numVars, N, C, mapY);
 		// optimize
-		solve(env, lp, N);
+		solve(env, lp, N, mapY);
 		// free
 		CPXfreeprob(env, &lp);
 		CPXcloseCPLEX(&env);

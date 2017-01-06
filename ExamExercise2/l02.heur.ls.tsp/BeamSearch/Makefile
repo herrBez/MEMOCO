@@ -2,7 +2,7 @@ CC = g++
 CPPFLAGS = -g -Wall -O2
 LDFLAGS =
 
-OBJ = main.o
+OBJ = TSPSolverSA.o main.o
 
 %.o: %.cpp
 		$(CC) $(CPPFLAGS) -c $^ -o $@
