@@ -15,10 +15,12 @@ bool KPSolver::exec(const std::vector<double>& weights, const std::vector<double
 		
 		// add vars
 		int n = weights.size();
-		//TODO...
+		std::vector<char> xtype(n, 'I');
+		CHECKED_CPX_CALL( CPXnewcols, env, lp, n, &profits[0], NULL, NULL, &xtype[0], NULL );
+		CPXchgobjsen(env, lp, CPX_MAX);
 		
 		// add constraint
-		//TODO...
+		
 		
 		// solve
 		CHECKED_CPX_CALL( CPXmipopt, env, lp );

@@ -3,13 +3,12 @@
  * @brief 
  *
  */
-
 #include "cs1d.h"
 #include "knapsack.h"
 #include <cmath>
 #include <iostream>
 #include <fstream>
-
+//Tollerance of cplex 10 alla meno 6
 const double EPS = 1e-5; //tolerance for numeric issues
 
 void Data::read(const char* filename)
@@ -36,11 +35,13 @@ void CS1D::initMaster(const Data& data)
 {
 	// setup initial LP
 	std::vector<double> obj(data.m, 1.0);
+	//Non negative real variables
 	CHECKED_CPX_CALL( CPXnewcols, env, lp, data.m, &obj[0], 0, 0, 0, 0 );
 	std::vector<int> matbeg(data.m);
 	std::vector<int> idx(data.m);
 	std::vector<double> coef(data.m);
 	std::vector<char> sense(data.m, 'G');
+	//Initial matrix
 	for (int i = 0; i < data.m; i++)
 	{
 		matbeg[i] = i;
@@ -53,9 +54,10 @@ void CS1D::initMaster(const Data& data)
 	CHECKED_CPX_CALL( CPXwriteprob, env, lp, "initial.lp", NULL );
 }
 
+// u is the output variable
 void CS1D::solveMasterLP(std::vector<double>& x, std::vector<double>& u, double& objval)
 {
-	// solve
+	// solve -> continuos problem
 	CHECKED_CPX_CALL( CPXlpopt, env, lp );
 	// get current LP obj value
 	CHECKED_CPX_CALL( CPXgetobjval, env, lp, &objval );
@@ -66,6 +68,7 @@ void CS1D::solveMasterLP(std::vector<double>& x, std::vector<double>& u, double&
 	// get current RESTRICTED LP DUAL solution
 	int m = CPXgetnumrows(env, lp);
 	u.resize(m);
+	// u = pi greco (dual variables)
 	CHECKED_CPX_CALL( CPXgetpi, env, lp, &u[0], 0, m - 1 );
 }
 

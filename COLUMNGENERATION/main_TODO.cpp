@@ -36,8 +36,9 @@ int main (int argc, char const *argv[])
 		while(true)
 		{
 			cs1dSolver.solveMasterLP(x, u, &objval);
-			// TODO... 
-			//	- solve master obtaining dual information
+			if(!cs1dSolver.price(env2, data, u))
+				break;
+			
 		}
 		cout << "\nx: "; for (unsigned int i = 0; i < x.size(); i++) std::cout << setw(7) << x[i] << " ";
 
