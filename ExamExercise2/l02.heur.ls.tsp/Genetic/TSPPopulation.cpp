@@ -6,8 +6,7 @@ void TSPPopulation::printPopulation (){
 	{ 
 		cout << "###";
 		p.print();
-		cout << "###" << endl;
-		
+		cout << "###" << endl;	
 	});
 }
 

@@ -63,7 +63,6 @@ bool TSPSolverGA::solve ( const TSP& tsp , vector< TSPSolution > & currPopulatio
 		
 			currPopulation.push_back(offspring1);
 			currPopulation.push_back(offspring2);
-		
 		}
 		
 	
