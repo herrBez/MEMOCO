@@ -1,17 +1,19 @@
 /**
+ * @author Mirko Bez
  * @file main.cpp
- * Usage: ./main [N] [MAX_COST]
+ * 
+ * Usage: ./main <filename.dat>
  */
+ 
 #include <cstdio>
 #include <iostream>
+#include <fstream>
 #include <vector>
-#include "cpxmacro.h"
 #include <time.h>
 #include <sys/time.h>
-#include <stdio.h>
 #include <cmath>
+#include "cpxmacro.h"
 
-#define VERBOSE
 
 using namespace std;
 
@@ -28,24 +30,21 @@ char name[NAME_SIZE];
 /**
  * set up the model for CPLEX
  * @param env the cplex enviroment
- * @param lp the cplesx problem
- * @param numVars
- * @param N
- * @param MAX_COST
+ * @param lp the cplex problem
+ * @param N the number of nodes of the TSP
+ * @param C the matrix containing the costs from i to j
+ * @param mapY used in order to have the result outside the setup function.
  */	
-void setupLP(CEnv env, Prob lp, int * numVars, int N, vector< vector<int> > C, vector< vector<int> > & mapY)
+void setupLP(CEnv env, Prob lp, int N, vector< vector<int> > C, vector< vector<int> > & mapY)
 {	
 	
 	int current_var_position 	= 0;
-	/* Initialize three 2 dimensional vectors mapX, mapY, C */
 	vector< vector<int> > mapX(N, vector<int> (N));
-	//vector< vector<int> > mapY(N, vector<int> (N));
-
 	
-	
-	
-	//add x variables
-	// x_ij = amount of the flow shipped from i to j 
+	/* 
+	 * adding x variables
+	 * x_ij := amount of the flow shipped from i to j 
+	 */ 
 	for(int i = 0; i < N; i++){
 		for(int j = 0; j < N; j++){
 			if(i == j)
@@ -62,7 +61,9 @@ void setupLP(CEnv env, Prob lp, int * numVars, int N, vector< vector<int> > C, v
 		}
 	}
 
-	//add y variables
+	/* add y variables
+	 * y_{ij} = 
+	 */
 	for(int i = 0; i < N; i++){
 		for(int j = 0; j < N; j++){
 			if(i == j)
@@ -79,7 +80,7 @@ void setupLP(CEnv env, Prob lp, int * numVars, int N, vector< vector<int> > C, v
 	}
 	
 	//Creating constraint Nr 1 sum_{j:(0,j)} x_0j = |N|
-	//Creating scope in order to avoid future name conflicts (I will use idx other times)
+	//Creating additional scope in order to avoid future name conflicts (I will use idx other times)
 	{
 		vector<int> idx(N);
 		vector<double> coef(N);
@@ -199,23 +200,16 @@ void setupLP(CEnv env, Prob lp, int * numVars, int N, vector< vector<int> > C, v
  	CHECKED_CPX_CALL( CPXwriteprob, env, lp, "Model.lp", NULL ); 
 }
 
-
 /**
- * solve the model write the result in a file and returns the return value of the function
+ * fetch the y variables from CPLEX, put the value in an array and print the values (as in the 
+ * metaheuristic version).
+ * @param env the CPLEX environment
+ * @param lp the CPLEX problem
+ * @param N the number of nodes of the TSP
+ * @param mapY map containing the (CPLEX) index of the y variables of the problem
+ * used in order to fetch the values of the y variables and print them on the screen.
  */
-double solve( CEnv env, Prob lp, int N, vector< vector<int> > mapY) {
-	clock_t t1,t2;
-    t1 = clock();
-    struct timeval  tv1, tv2;
-    gettimeofday(&tv1, NULL);
-	
-	CHECKED_CPX_CALL( CPXmipopt, env, lp );
-	t2 = clock();
-    gettimeofday(&tv2, NULL);
-	double objval = 0.0;
-	CHECKED_CPX_CALL( CPXgetobjval, env, lp, &objval );
-	cout << "Objval: " << (objval/100) << endl;
-	//CHECKED_CPX_CALL( CPXsolwrite, env, lp, "Model.sol" );
+void fetch_and_print_y_variables(CEnv env, Prob lp, int N, vector< vector<int> > mapY){
 	int begin =  mapY[0][1]; //First y index
 	int end = mapY[N-1][N-2]; //Last y index
 	int length = end - begin + 1;
@@ -252,16 +246,51 @@ double solve( CEnv env, Prob lp, int N, vector< vector<int> > mapY) {
 	}
 	
 	cout << endl;
-	
 	free(y);
+}
+
+
+/**
+ * solve the model write the result in a file and returns the return value of the function
+ * @param env the CPLEX environment
+ * @param lp the CPLEX problem
+ * @param N the number of nodes of the TSP
+ * @param mapY a map containing the (CPLEX) index of the y variables of the problem
+ * used in order to retrieve the values of the y variables and print them on the screen.
+ * @return objval the optimal solution
+ */
+double solve( CEnv env, Prob lp, int N, vector< vector<int> > mapY) {
+	clock_t t1,t2;
+    t1 = clock();
+    struct timeval  tv1, tv2;
+    gettimeofday(&tv1, NULL);
+	
+	CHECKED_CPX_CALL( CPXmipopt, env, lp );
+	t2 = clock();
+    gettimeofday(&tv2, NULL);
+	double objval = 0.0;
+	CHECKED_CPX_CALL( CPXgetobjval, env, lp, &objval );
+	
 	cout << "in " << (double)(tv2.tv_sec+tv2.tv_usec*1e-6 - (tv1.tv_sec+tv1.tv_usec*1e-6)) << " seconds (user time)\n";
     cout << "in " << (double)(t2-t1) / CLOCKS_PER_SEC << " seconds (CPU time)\n";
+	
+	
+	cout << "Objval: " << objval << endl;
+	//CHECKED_CPX_CALL( CPXsolwrite, env, lp, "Model.sol" );
 	
 	return objval;
 }
 
+/**
+ * read a file in the speified format:
+ * the first row contains N,  the number of nodes
+ * the rest N rows contain the information about the distances (It can be euclidean, Manhattan ecc.)
+ * @param filename the name of the file to read
+ * @return return a matrix of size N*N containing the read costs
+ */
 vector< vector<int> > readFile(const char * filename){
 	FILE * infile = fopen(filename, "r");
+
 	fscanf(infile, "%[^\n]", name);
 	int N = strtol(name, NULL, 0);
 	vector< vector<int> > C(N, vector<int> (N));
@@ -280,7 +309,7 @@ vector< vector<int> > readFile(const char * filename){
 
 
 /**
- * reads the command line parameters if there are any otherwise it initialize N and max_cost
+ * reads the command line parameters if there are any, otherwise it initialize N and max_cost
  * with the default values
  * @param argc
  * @param argv[]
@@ -316,11 +345,10 @@ int main (int argc, char const *argv[])
 		cout << "Size of problem: " << N << endl;
 		DECL_ENV( env );
 		DECL_PROB( env, lp );
-		int numVars;
-		setupLP(env, lp, &numVars, N, C, mapY);
-		// optimize
+		setupLP(env, lp, N, C, mapY);
+		// find the solution
 		solve(env, lp, N, mapY);
-		// free
+		// free-allocated resolve
 		CPXfreeprob(env, &lp);
 		CPXcloseCPLEX(&env);
 	} catch (exception& e){

@@ -1,4 +1,5 @@
 /**
+ * @author Luigi De Giovanni
  * @file cpx_macro.h
  * Cplex Helper Macros
  *
