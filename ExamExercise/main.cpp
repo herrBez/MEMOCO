@@ -366,7 +366,7 @@ vector< vector <double> > get_option(int argc,  char * argv[]){
 /**
  * the main function
  * @param argc
- * @param argv[]
+ * @param argv
  * @return EXIT_SUCCESS on success, EXIT_FAILURE otherwise
  */
 int main (int argc, char *argv[])
