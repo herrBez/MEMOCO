@@ -4,8 +4,6 @@
  * 
  * Usage: ./main <filename.dat>
  */
- 
-#include <cstdio>
 #include <iostream>
 #include <fstream>
 #include <vector>
@@ -13,8 +11,8 @@
 #include <sys/time.h>
 #include <cmath>
 #include "cpxmacro.h"
-
-
+#include <getopt.h>
+#include <unistd.h>
 using namespace std;
 
 // error status and messagge buffer
@@ -22,8 +20,17 @@ int status;
 char errmsg[BUF_SIZE];		
 const int NAME_SIZE = 512;
 char name[NAME_SIZE];
+bool output_required = false;
+bool print = false;
 
 
+/** Struct containing the long options */
+static struct option long_options[4] = {	
+	{"help", no_argument, 0, 'h'},
+	{"print", no_argument, 0, 'p'},
+	{"output", no_argument, 0, 'o'},
+	{0, 0, 0, 0},
+};
 
 
 
@@ -62,7 +69,7 @@ void setupLP(CEnv env, Prob lp, int N, vector< vector<double> > C, vector< vecto
 	}
 
 	/* add y variables
-	 * y_{ij} = 
+	 * y_ij = 1 if the edge between node i and j is used 0 otherwise.
 	 */
 	for(int i = 0; i < N; i++){
 		for(int j = 0; j < N; j++){
@@ -196,18 +203,19 @@ void setupLP(CEnv env, Prob lp, int N, vector< vector<double> > C, vector< vecto
 			}
 		}
 	}
-	
- 	CHECKED_CPX_CALL( CPXwriteprob, env, lp, "Model.lp", NULL ); 
+	if(output_required){
+		CHECKED_CPX_CALL( CPXwriteprob, env, lp, "Model.lp", NULL ); 
+	}
 }
 
 /**
- * fetch the y variables from CPLEX, put the value in an array and print the values (as in the 
- * metaheuristic version).
+ * fetch the y_ij variables from CPLEX, put the value in an array and print the values (as in the 
+ * metaheuristic version). Called only when the option --print is given.
  * @param env the CPLEX environment
  * @param lp the CPLEX problem
  * @param N the number of nodes of the TSP
  * @param mapY map containing the (CPLEX) index of the y variables of the problem
- * used in order to fetch the values of the y variables and print them on the screen.
+ * used in order to fetch the values of the y variables and print the tsp solution on the screen.
  */
 void fetch_and_print_y_variables(CEnv env, Prob lp, int N, vector< vector<int> > mapY){
 	int begin =  mapY[0][1]; //First y index
@@ -220,7 +228,7 @@ void fetch_and_print_y_variables(CEnv env, Prob lp, int N, vector< vector<int> >
 	
 	for(int i = 1; i < N; i++){
 		
-		if(rint(y[i-1]) == 1.0){
+		if(round(y[i-1]) == 1.0){ //Searching in the first line the (only) 1, i.e. the first city to visit
 			k = i;
 			cout << "0" << " " << k << " ";
 			break;
@@ -228,12 +236,12 @@ void fetch_and_print_y_variables(CEnv env, Prob lp, int N, vector< vector<int> >
 	}
 	
 	int counter = 0;
-	while(k != 0 && counter < N+2) {
+	while(k != 0 && counter < N+2) { //untill reaching 0 the starting city and the number of cities is correct
 		counter++;
 		int start_index = k*N - k;
 		for(int i = 0; i < N; i++){
 			if(k == i) {
-				start_index-=1;
+				start_index -= 1;
 				continue;
 			}
 			if(round(y[start_index+i]) == 1.0){
@@ -276,8 +284,12 @@ double solve( CEnv env, Prob lp, int N, vector< vector<int> > mapY) {
 	
 	
 	cout << "Objval: " << objval << endl;
-	//CHECKED_CPX_CALL( CPXsolwrite, env, lp, "Model.sol" );
-	
+	if(print){
+		fetch_and_print_y_variables(env, lp, N, mapY);
+	} 
+	if(output_required){	
+		CHECKED_CPX_CALL( CPXsolwrite, env, lp, "Model.sol");
+	}
 	return objval;
 }
 
@@ -308,25 +320,48 @@ vector< vector<double> > readFile(const char * filename){
 
 
 
+/** 
+ * print the help message
+ * @param argv in order to get the name of the compiled program
+ */
+void print_help(char * argv[]){
+	cout << "Usage : " << argv[0] << " <instance.dat> " << " [OPT]... " << endl;
+	cout << endl;
+	cout << "-h, --help\t\t\tprint this message and exit" << endl;
+	cout << "-o, --output\t\t\twrite the solved problem in a file name Model.sol" << endl;
+	cout << "-p, --print\t\t\tat the end print the list of cities, e.g. 0 1 2 3 4 0" << endl;
+	cout << endl;
+}
 
 
 /**
- * reads the command line parameters if there are any, otherwise it initialize N and max_cost
- * with the default values
- * @param argc
- * @param argv[]
- * @param *N
- * @param *max_cost
+ * function that according to the given options set the flags
+ * 	--output, in order to print the solved problem in the given file
+ *  --print, in order to print the TSP-Solution 0 <1, 2 .. n> 0
+ * @param argc 
+ * @param argv
  */
-vector< vector<double> > get_command_line_parameters(int argc, char const * argv[]){
-	
-	if(argc < 2){
-		fprintf(stderr, "Usage: %s <filename.dat>\n", argv[0]);
+vector< vector <double> > get_option(int argc,  char * argv[]){
+	int c;
+	if(argc < 2) {
+		print_help(argv);
 		exit(EXIT_FAILURE);
 	}
-	return readFile(argv[1]);
+	// One can specify only the help flag without the instance file.
+	if(strcmp(argv[1], "-h") == 0 || strcmp(argv[1], "--help") == 0){
+		print_help(argv);
+	}
+	optind = 2; //Starting from index 2, because the first place is destinated to the istance file.
+	int option_index;
+	while((c = getopt_long (argc, argv, "", long_options, &option_index)) != EOF) {
+		switch(c){
+			case 'h': print_help(argv); exit(EXIT_SUCCESS); break;
+			case 'o': output_required=true; break;
+			case 'p': print = true; break;
+		}
+    }
+    return readFile(argv[1]);
 }
-
 
 /**
  * the main function
@@ -334,14 +369,14 @@ vector< vector<double> > get_command_line_parameters(int argc, char const * argv
  * @param argv[]
  * @return EXIT_SUCCESS on success, EXIT_FAILURE otherwise
  */
-int main (int argc, char const *argv[])
+int main (int argc, char *argv[])
 {
 	//variable used only to exit with the appropriate state
 	bool exc_arised = false;
 	try { 
 		
 		//In order to enable "random" generation of numbers
-		vector< vector<double> > C = get_command_line_parameters(argc, argv);	
+		vector< vector<double> > C = get_option(argc, argv);	
 		int N = C.size();
 		vector< vector<int> > mapY(N, vector<int> (N));
 		cout << "Size of problem: " << N << endl;
