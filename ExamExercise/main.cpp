@@ -35,7 +35,7 @@ char name[NAME_SIZE];
  * @param C the matrix containing the costs from i to j
  * @param mapY used in order to have the result outside the setup function.
  */	
-void setupLP(CEnv env, Prob lp, int N, vector< vector<int> > C, vector< vector<int> > & mapY)
+void setupLP(CEnv env, Prob lp, int N, vector< vector<double> > C, vector< vector<int> > & mapY)
 {	
 	
 	int current_var_position 	= 0;
@@ -288,17 +288,19 @@ double solve( CEnv env, Prob lp, int N, vector< vector<int> > mapY) {
  * @param filename the name of the file to read
  * @return return a matrix of size N*N containing the read costs
  */
-vector< vector<int> > readFile(const char * filename){
-	FILE * infile = fopen(filename, "r");
+vector< vector<double> > readFile(const char * filename){
+	ifstream infile(filename);
+	int N;
+	if(!infile.is_open()){
+		cerr << "Error. Could not open file " << filename << ". Exiting ..." << endl;
+		exit(EXIT_FAILURE);
+	}
+	infile >> N;
+	vector< vector<double> > C(N, vector<double> (N));
 
-	fscanf(infile, "%[^\n]", name);
-	int N = strtol(name, NULL, 0);
-	vector< vector<int> > C(N, vector<int> (N));
 	for(int i = 0; i < N; i++){
-		double tmp;
 		for(int j = 0; j < N; j++){
-			fscanf(infile, "%lf ", &tmp);
-			C[i][j] = (int) (tmp * 100);
+			infile >> C[i][j];
 		}
 	}
 	return C;
@@ -316,7 +318,7 @@ vector< vector<int> > readFile(const char * filename){
  * @param *N
  * @param *max_cost
  */
-vector< vector<int> > get_command_line_parameters(int argc, char const * argv[]){
+vector< vector<double> > get_command_line_parameters(int argc, char const * argv[]){
 	
 	if(argc < 2){
 		fprintf(stderr, "Usage: %s <filename.dat>\n", argv[0]);
@@ -339,7 +341,7 @@ int main (int argc, char const *argv[])
 	try { 
 		
 		//In order to enable "random" generation of numbers
-		vector< vector<int> > C = get_command_line_parameters(argc, argv);	
+		vector< vector<double> > C = get_command_line_parameters(argc, argv);	
 		int N = C.size();
 		vector< vector<int> > mapY(N, vector<int> (N));
 		cout << "Size of problem: " << N << endl;
