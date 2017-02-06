@@ -35,17 +35,52 @@ struct Point{
 	void print(){
 		cout << "(" << x << "," << y << ")" << endl;
 	}
+	
+	double euclideanDistance(Point other){
+		double dx = other.x - x;
+		double dy = other.y - y;
+		return dx*dx + dy*dy;
+	}
+	double manhattanDistance(Point other){
+		double dx = abs(other.x - x);
+		double dy = abs(other.y - y);
+		return dx + dy;
+	}
  };  
 
 
 
-
-/**
- * @TODO 
- */
-void printGerber(){
-	
+void printDatFile(double * cost, const int N){
+	ofstream outfile("TspInstance.dat");
+	outfile << N << endl;
+	for(int i = 0; i < N; i++){
+		for(int j  = 0; j < N; j++){
+			outfile << cost[i*N + j] << " ";
+		}
+		outfile << endl;
+	}
+	outfile.close();
 }
+
+bool euclidean = false;
+
+
+double * calculateDistance(const int N, Point * p){
+	double * cost = new double[N*N];
+	for(int i = 0; i < N; i++){
+		for(int j = 0; j < N; j++){
+			if(i == j){
+				cost[i*N + j] = 0;
+			}
+			
+			cost[i*N + j] = euclidean?p[i].euclideanDistance(p[j]):p[i].manhattanDistance(p[j]);
+		}
+	}
+	return cost;
+}
+
+
+
 
 /**
  * print the instance generated in a PBM file
@@ -212,21 +247,30 @@ Point * generateSquareInstance(const int N, const int size){
 void generateInstance(int N, char opt){
 	const int size = 10*N;
 	Point * arr;
+	double * cost;
 	switch(opt){
 		case 'r': 
 			cout << "genereating random instance" << endl; 
 			arr = generateRandomInstance(N, size);
 			printPBM(size, arr, N);
+			cost = calculateDistance(N, arr);
+			printDatFile(cost, N);
 			break;
 		case 'q': 
 			cout << "generating instance with square/rectangles" << endl;
 			arr = generateSquareInstance(N, size);
 			printPBM(size, arr, N);
+			cost = calculateDistance(N, arr);
+			printDatFile(cost, N);
+			
 			break;
 		//case 'c': cout << "generating instance with circles" << endl; break;
-		default: arr = new Point[0];
+		default: 
+			arr = new Point[0];
+			cost = new double[0];
 	}
 	delete[] arr;
+	delete[] cost;
 }
 
 /**
