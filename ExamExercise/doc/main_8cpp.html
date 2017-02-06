@@ -110,8 +110,6 @@ Functions</h2></td></tr>
 <tr class="separator:a14295a4e6a894825f205a1ecf85f64ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a17ce6792f16cbf80641c1e7770e20c82"><td class="memItemLeft" align="right" valign="top">vector&lt; vector&lt; double &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a17ce6792f16cbf80641c1e7770e20c82">get_option</a> (int argc, char *argv[])</td></tr>
 <tr class="separator:a17ce6792f16cbf80641c1e7770e20c82"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a72c6e86957eabe9d19fbcf50d6a8e67d"><td class="memItemLeft" align="right" valign="top">vector&lt; vector&lt; double &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a72c6e86957eabe9d19fbcf50d6a8e67d">get_command_line_parameters</a> (int argc, const char *argv[])</td></tr>
-<tr class="separator:a72c6e86957eabe9d19fbcf50d6a8e67d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0ddf1224851353fc92bfbff6f499fa97"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97">main</a> (int argc, char *argv[])</td></tr>
 <tr class="separator:a0ddf1224851353fc92bfbff6f499fa97"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -129,9 +127,6 @@ const int&#160;</td><td class="memItemRight" valign="bottom"><b>NAME_SIZE</b> = 
 <tr class="memitem:abf5b047e1f527e88ab5997329d1b557b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abf5b047e1f527e88ab5997329d1b557b"></a>
 char&#160;</td><td class="memItemRight" valign="bottom"><b>name</b> [NAME_SIZE]</td></tr>
 <tr class="separator:abf5b047e1f527e88ab5997329d1b557b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a952f3739874117fd8fbc1b4e3f837ffd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a952f3739874117fd8fbc1b4e3f837ffd"></a>
-char&#160;</td><td class="memItemRight" valign="bottom"><b>output_file</b> [100]</td></tr>
-<tr class="separator:a952f3739874117fd8fbc1b4e3f837ffd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a39c84ba07dd06623c48ba7eb20e70b1d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a39c84ba07dd06623c48ba7eb20e70b1d"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>output_required</b> = false</td></tr>
 <tr class="separator:a39c84ba07dd06623c48ba7eb20e70b1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -178,47 +173,12 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>print</b> = false</td
         </tr>
       </table>
 </div><div class="memdoc">
-<p>fetch the y variables from CPLEX, put the value in an array and print the values (as in the metaheuristic version). </p><dl class="params"><dt>Parameters</dt><dd>
+<p>fetch the y_ij variables from CPLEX, put the value in an array and print the values (as in the metaheuristic version). Called only when the option &ndash;print is given. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">env</td><td>the CPLEX environment </td></tr>
     <tr><td class="paramname">lp</td><td>the CPLEX problem </td></tr>
     <tr><td class="paramname">N</td><td>the number of nodes of the TSP </td></tr>
     <tr><td class="paramname">mapY</td><td>map containing the (CPLEX) index of the y variables of the problem used in order to fetch the values of the y variables and print the tsp solution on the screen. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a class="anchor" id="a72c6e86957eabe9d19fbcf50d6a8e67d"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">vector&lt; vector&lt;double&gt; &gt; get_command_line_parameters </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>argc</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>argv</em>[]&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>reads the command line parameters if there are any, otherwise it initialize N and max_cost with the default values </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">argc</td><td></td></tr>
-    <tr><td class="paramname">argv[]</td><td></td></tr>
-    <tr><td class="paramname">*N</td><td></td></tr>
-    <tr><td class="paramname">*max_cost</td><td></td></tr>
   </table>
   </dd>
 </dl>
@@ -284,7 +244,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>print</b> = false</td
 <p>the main function </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">argc</td><td></td></tr>
-    <tr><td class="paramname">argv[]</td><td></td></tr>
+    <tr><td class="paramname">argv</td><td></td></tr>
   </table>
   </dd>
 </dl>
@@ -442,7 +402,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>print</b> = false</td
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Feb 5 2017 22:50:58 for TSP Solver using Cplex by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Feb 6 2017 22:08:07 for TSP Solver using Cplex by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

@@ -23,24 +23,37 @@ using namespace std;
  * struct used to simulate points
  */
 struct Point{
+
     double x;
     double y;
-
+	
+	
     inline Point& operator=(Point other){
         x=other.x;
         y=other.y;
         return *this;
     }
-	
+	/**
+	 * print the points
+	 */
 	void print(){
 		cout << "(" << x << "," << y << ")" << endl;
 	}
-	
+	/**
+	 * calculats the euclidean distance between this and other
+	 * @param other
+	 * @return the manhattan distance between this and other
+	 */
 	double euclideanDistance(Point other){
 		double dx = other.x - x;
 		double dy = other.y - y;
 		return dx*dx + dy*dy;
 	}
+	/**
+	 * calculates the manhattan distance between this and other
+	 * @param other
+	 * @return the manhattan distance between this and other
+	 */
 	double manhattanDistance(Point other){
 		double dx = abs(other.x - x);
 		double dy = abs(other.y - y);
@@ -49,7 +62,12 @@ struct Point{
  };  
 
 
-
+/**
+ * print the cost in a dat file
+ * @param cost
+ * @param N
+ * 
+ */
 void printDatFile(double * cost, const int N){
 	ofstream outfile("TspInstance.dat");
 	outfile << N << endl;
@@ -64,7 +82,12 @@ void printDatFile(double * cost, const int N){
 
 bool euclidean = false;
 
-
+/**
+ * calculate the distance between the points and return a (linearized) 2-dimensional array
+ * @param N the number of points
+ * @param p the points
+ * @return an array containing the distances
+ */
 double * calculateDistance(const int N, Point * p){
 	double * cost = new double[N*N];
 	for(int i = 0; i < N; i++){
@@ -83,7 +106,8 @@ double * calculateDistance(const int N, Point * p){
 
 
 /**
- * print the instance generated in a PBM file
+ * print the instance generated in a PBM file. 
+ * (N.B. It is pure ASCII (it can require several MB with big N values) : possible improvement use the corresponding binary format.
  * @param size the size of the grid (I assume it is squared)
  * @param N the number of points
  */
