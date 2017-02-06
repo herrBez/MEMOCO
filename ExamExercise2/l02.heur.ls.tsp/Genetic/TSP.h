@@ -22,7 +22,10 @@ public:
   TSP() : n(0) , infinite(1e10) { }
   int n; //number of nodes
   std::vector< std::vector<double> > cost;
-  
+  /**
+   * parse the name located at filename
+   * @param filename the (local) path to the file to parse
+   */
   void read(const char* filename)
   {
     std::ifstream in(filename);

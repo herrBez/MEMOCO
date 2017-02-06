@@ -34,7 +34,7 @@ bool TSPSolverGA::solve ( const TSP& tsp , vector< TSPSolution > & currPopulatio
 	int nonImprovingIterations = 0;
 	unsigned int R = groupSize;
 	double bestValue = currPopulation[0].value;
-	while(nonImprovingIterations < 500) {
+	while(nonImprovingIterations < 500) { //Stopping criterion
 		
 		//sum_{k=1}^{N} f_k
 		double sum = accumulate(currPopulation.begin(), currPopulation.end(), 0.0, 
@@ -45,7 +45,7 @@ bool TSPSolverGA::solve ( const TSP& tsp , vector< TSPSolution > & currPopulatio
 		/* Generating R children */
 		for(unsigned int i = 0; i < R; i+=2){
 			int parent1 = getParent(currPopulation, sum);
-			int parent2 = parent1;
+			int parent2 = parent1; //Assuring that parent2 is different from parent 1
 			while(parent2 == parent1){
 				parent2=getParent(currPopulation, sum);
 			}
@@ -70,7 +70,7 @@ bool TSPSolverGA::solve ( const TSP& tsp , vector< TSPSolution > & currPopulatio
 		
 		insertionSortPopulation(currPopulation);
 		
-		
+		/* removing the worst values */
 		while(currPopulation.size() != N){
 			currPopulation.pop_back();
 		}

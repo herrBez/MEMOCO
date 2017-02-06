@@ -4,6 +4,10 @@
 #include "TSPSolverGA.h"
 using namespace std;
 
+/**
+ * Class that models the population of solution.
+ * Substantially it is a wrapper to a vector of TSPSolution.
+ */
 class TSPPopulation
 {
 public:
@@ -22,7 +26,9 @@ public:
 	
 	
 	
-	
+	/**
+	 * prints the population (used only for debug purposes
+	 */
 	void printPopulation();
 
 };
