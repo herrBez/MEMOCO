@@ -14,16 +14,19 @@
 #include <vector>
 
 /**
- * Class that describes a TSP instance (a cost matrix, nodes are identified by integer 0 ... n-1)
+ * Class that describes a TSP instance (a cost matrix, nodes are identified by
+ * integer 0 ... n-1)
  */
-class TSP
-{
-public:
-  TSP() : n(0) , infinite(1e10) { }
-  int n; //number of nodes
-  std::vector< std::vector<double> > cost;
-  void read(const char* filename)
-  {
+class TSP {
+ public:
+  TSP() : n(0), infinite(1e10) {}
+  int n;  // number of nodes
+  std::vector<std::vector<double> > cost;
+  /**
+   * function that parse the .dat file and store it in the TSP instance
+   * @param filename the file to read
+   */
+  void read(const char* filename) {
     std::ifstream in(filename);
     // read size
     in >> n;
@@ -40,7 +43,8 @@ public:
     }
     in.close();
   }
-  double infinite; // infinite value (an upper bound on the value of any feasible solution
+  double infinite;  // infinite value (an upper bound on the value of any
+                    // feasible solution
 };
 
 #endif /* TSP_H */

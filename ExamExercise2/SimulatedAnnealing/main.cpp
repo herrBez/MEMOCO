@@ -17,11 +17,20 @@ int status;
 char errmsg[255];
 
 
+/**
+ * main function 
+ * @param argc
+ * @param argv
+ * @return EXIT_SUCCESS on success, EXIT_FAILURE otherwise
+ */
 int main (int argc, char const *argv[])
 {
+	bool exc_raised = false;
   try
   {
     if (argc < 2) throw runtime_error("usage: %s filename.dat");  /// new parameters for TS
+    
+     srand(time(NULL));
     
     TSP tspInstance; 
     tspInstance.read(argv[1]);
@@ -39,8 +48,8 @@ int main (int argc, char const *argv[])
     
 	
     TSPSolution bestSolution(tspInstance);
-    int T_0 = 1000;
-    int maxIter = 1000;
+    double T_0 = 1000;
+    int maxIter = 30; //iteration at constant temperature
     tspSolver.solve(tspInstance,aSolution, bestSolution, T_0 , maxIter); /// new parameters for TS
 	
     t2 = clock();
@@ -59,6 +68,7 @@ int main (int argc, char const *argv[])
   catch(exception& e)
   {
    cout << ">>>EXCEPTION: " << e.what() << std::endl;
+	exc_raised = true;
   }
-  return 0;
+  return exc_raised?EXIT_FAILURE:EXIT_SUCCESS;
 }

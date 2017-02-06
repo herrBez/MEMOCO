@@ -5,14 +5,10 @@
 
 
 #include "TSPSolution.h"
-/**
- * Class representing substring reversal move
- */
-typedef struct move {
-  int			from;
-  int			to;
-} TSPMove; 
 
+/**
+ * class that implements a TSPSolver that use simulated annealing
+ */
 class TSPSolverSA
 {
 public:
@@ -48,34 +44,22 @@ public:
       sol.sequence[idx1] = sol.sequence[idx2];
       sol.sequence[idx2] = tmp;
     }
-    std::cout << "### "; sol.print(); std::cout << " ###" << std::endl;
+    //std::cout << "### "; sol.print(); std::cout << " ###" << std::endl;
     return true;
   }
   /**
-   * search for a good tour by neighbourhood search
+   * simulated annealing
    * @param TSP TSP data
    * @param initSol initial solution
    * @param bestSol best found solution (output)
-   * @return true id everything OK, false otherwise
+   * @param T_0 the start temperature
+   * @param maxIter maximum number of iteration
+   * @return true if everything OK, false otherwise
    */
-  bool solve ( const TSP& tsp , const TSPSolution& initSol , TSPSolution& bestSol, const int T_0, const int maxIter );
+  bool solve ( const TSP& tsp , const TSPSolution& initSol , TSPSolution& bestSol, const double T_0, const int maxIter );
 
-protected:
-  /**
-   * explore the neighbouhood
-   * @param tsp TSP data
-   * @param currSol center solution
-   * @return (into param move) the selected move (stepest descent strategy)
-   * @return the incremental cost with respect to currSol
-   */
-  double        findBestNeighbor ( const TSP& tsp , const TSPSolution& currSol , TSPMove& move );
-  /**
-   * perform a swap move (corresponding to 2-opt)
-   * @param tspSol solution to be perturbed
-   * @param move move to perform
-   * @return (into param tspSol) the perturbed solution
-   */
-  TSPSolution&  swap 			 ( TSPSolution& tspSol , const TSPMove& move );
+
+  
 };
 
 

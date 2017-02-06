@@ -17,10 +17,12 @@
 class TSPSolution
 {
 public:
-  std::vector<int>		sequence;
-  double value;
+	/** vector containing the solution, e.g. <0,1 .. n-1, 0>*/
+	std::vector<int>		sequence;
+	/** the value of the solution */
+	double value;
 public:
-  /** Constructor 
+ /** Constructor 
   * build a standard solution as the sequence <0, 1, 2, 3 ... n-1, 0>
   * @param tsp TSP instance
   * @return ---
@@ -72,6 +74,15 @@ public:
     return *this;
   }
   
+  /**
+   * function that swap a and b in the tspsolution and calculate
+   * the new value of the solution in a constant time, using the fact
+   * that only two values are changed. (it is not necessary to perform the sum again)
+   * @param tsp the tsp problem instacnce containing the cost from point i to point j
+   * @param a the first index to swap
+   * @param b the second index to swap
+   * @return the calculated tsp solution
+   */
   TSPSolution& swap(const TSP & tsp, int a, int b){
 	  value = value - tsp.cost[sequence[a-1]][sequence[a]];
 	  value = value - tsp.cost[sequence[a]][sequence[a+1]];
