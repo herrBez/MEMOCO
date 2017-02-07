@@ -144,6 +144,15 @@ double * calculateDistance(const int N, Point * p){
 	return cost;
 }
 
+
+/**
+ * print the instance in a binary pbm file. The advantage with respect to its ASCII counterpart
+ * is that instead of saving 1 or 0 in an (entire byte) it saves 1 or 0 in bits. So it is 8 times
+ * smaller than its ASCII counterpart
+ * @param size the size of the field
+ * @param a the array containing the points to print
+ * @param N the number of points
+ */
 void printBinaryPBM(const int size, Point * a, int N){
 	int size_8 = (int) ceil(((double)size)/8) * 8; //approximate to next multiple of eight
 	cout << endl << size << size_8 << endl;
