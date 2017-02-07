@@ -22,13 +22,14 @@ const int NAME_SIZE = 512;
 char name[NAME_SIZE];
 bool output_required = false;
 bool print = false;
-
+bool benchmark = false;
 
 /** Struct containing the long options */
-static struct option long_options[4] = {	
+static struct option long_options[] = {	
 	{"help", no_argument, 0, 'h'},
 	{"print", no_argument, 0, 'p'},
 	{"output", no_argument, 0, 'o'},
+	{"benchmark-output", no_argument, 0, 'b'},
 	{0, 0, 0, 0},
 };
 
@@ -279,16 +280,22 @@ double solve( CEnv env, Prob lp, int N, vector< vector<int> > mapY) {
 	double objval = 0.0;
 	CHECKED_CPX_CALL( CPXgetobjval, env, lp, &objval );
 	
-	cout << "in " << (double)(tv2.tv_sec+tv2.tv_usec*1e-6 - (tv1.tv_sec+tv1.tv_usec*1e-6)) << " seconds (user time)\n";
-    cout << "in " << (double)(t2-t1) / CLOCKS_PER_SEC << " seconds (CPU time)\n";
+	double user_time = (double)(tv2.tv_sec+tv2.tv_usec*1e-6 - (tv1.tv_sec+tv1.tv_usec*1e-6));
+	double cpu_time = (double)(t2-t1) / CLOCKS_PER_SEC;
 	
-	
-	cout << "Objval: " << objval << endl;
 	if(print){
 		fetch_and_print_y_variables(env, lp, N, mapY);
 	} 
 	if(output_required){	
 		CHECKED_CPX_CALL( CPXsolwrite, env, lp, "Model.sol");
+	}
+	if(benchmark){
+		printf("%4d %6.6f %6.6f %6.6f\n", N, user_time, cpu_time, objval);
+	} else {
+		cout << "Problem Size N" << N << endl;
+		cout << "in " << user_time << " seconds (user time)\n";
+		cout << "in " << cpu_time << " seconds (CPU time)\n";
+		cout << "Objval: " << objval << endl;
 	}
 	return objval;
 }
@@ -338,6 +345,7 @@ void print_help(char * argv[]){
  * function that according to the given options set the flags
  * 	--output, in order to print the solved problem in the given file
  *  --print, in order to print the TSP-Solution 0 <1, 2 .. n> 0
+ *  --benchmark_output print a special form of output N user_time cpu_time objval
  * @param argc 
  * @param argv
  */
@@ -353,11 +361,13 @@ vector< vector <double> > get_option(int argc,  char * argv[]){
 	}
 	optind = 2; //Starting from index 2, because the first place is destinated to the istance file.
 	int option_index;
-	while((c = getopt_long (argc, argv, "", long_options, &option_index)) != EOF) {
+	while((c = getopt_long (argc, argv, "hopb", long_options, &option_index)) != EOF) {
 		switch(c){
 			case 'h': print_help(argv); exit(EXIT_SUCCESS); break;
 			case 'o': output_required=true; break;
 			case 'p': print = true; break;
+			case 'b': benchmark = true; break;
+			 
 		}
     }
     return readFile(argv[1]);
@@ -379,7 +389,7 @@ int main (int argc, char *argv[])
 		vector< vector<double> > C = get_option(argc, argv);	
 		int N = C.size();
 		vector< vector<int> > mapY(N, vector<int> (N));
-		cout << "Size of problem: " << N << endl;
+		
 		DECL_ENV( env );
 		DECL_PROB( env, lp );
 		setupLP(env, lp, N, C, mapY);
