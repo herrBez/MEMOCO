@@ -52,7 +52,7 @@ public:
    * @param TSP TSP data
    * @param initSol initial solution
    * @param bestSol best found solution (output)
-   * @param T_0 the start temperature
+   * @param T_0 the start temlsperature
    * @param maxIter maximum number of iteration
    * @return true if everything OK, false otherwise
    */
