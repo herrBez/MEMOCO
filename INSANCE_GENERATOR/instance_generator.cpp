@@ -187,14 +187,13 @@ void printBinaryPBM(const int size, Point * a, int N){
 	}
 	ofs.close();
 	delete[] img;
-	exit(EXIT_SUCCESS);
 }
 
 
 
 /**
  * print the instance generated in a PBM file. 
- * (N.B. It is pure ASCII (it can require several MB with big N values) : possible improvement use the corresponding binary format.
+ * (N.B. It is pure ASCII, please use the function printBinaryPBM)
  * @param size the size of the grid (I assume it is squared)
  * @param N the number of points
  */
