@@ -34,8 +34,7 @@ int main (int argc, char const *argv[])
 
 		TSP tspInstance; 
 		tspInstance.read(argv[1]);
-		S
-
+		
 		TSPSolverGA tspSolver;
 		//tspSolver.initRnd(aSolution);
 		vector < TSPSolution > initialPopulation;

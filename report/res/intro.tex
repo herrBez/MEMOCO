@@ -1,3 +1,4 @@
+
 \section{Introduction}
 The aim of this project was to familiarize with different approach for the solution of a well-known combinatorial problem, in
 particular the assignment required to solve the problem with two different approaches:
@@ -16,10 +17,10 @@ The assignment of the problem was the following:
 	to determine the hole sequence that minimizes the total drilling time, taking into account
 	that the time needed for making an hole is the same and constant for all the holes.
 \end{quote}
-This problem can be viewed as a particular instance of the TSP problem, in which the salesman is represented by the 
+This problem can be viewed as a particular instance of the TSP problem: the salesman is represented by the 
 drill and the cities are represented by the holes.
-Because of the NP-Hardness of this problem it is a good candidate for an implementation of a metaheuristic approach,
-particularly when the size of the problem, i.e. the number of holes becomes bigger.
+Since the problem is NP-hard, the exact method does not halt in a reasonable time. Therefore the metaheuristic approach is more convenient exspecially when $N$ is big, i.e. bigger than $60$.
+ 
 \subsection{Problem Formalization}
 \begin{itemize}
 	\item $y_{ij}$ 1 if the edge between hole $i$ and $j$ is used.

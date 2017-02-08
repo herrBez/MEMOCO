@@ -1,34 +1,43 @@
 \section{Second Assignment}
 In this second assignment the purpose was to implement a solution for the problem
-using a metaheuristic.
-I chose to use a genetic algorithm. 
-\paragraph{Encoding of the individuals} In order to encode the individuals I used the provided
+using a metaheuristic approach.
+I chose to use a genetic algorithm TODO aggiungi motivazoione
+\paragraph{Encoding of the individuals.} In order to encode the individuals I used the provided
 encoding, i.e. an array of dimension N+1 containing a sequence of holes index, e.g.
 $<0\ 1\ \dots\ N\ 0>$
-\paragraph{Initial Population} The initial population is formed by $k$ individuals.
-In order to diversify the population fast all the individuals are chosen randomly, but
+\paragraph{Initial Population.} The initial population is formed by $k$ individuals.
+In order to diversify the population, fast all the individuals are chosen randomly, but
 the increasing sequence $<0\ 1\ \dots\ N\ 0>$ and the decreasing sequence $<0\ N\ \dots\ N\ 0>$
 are always granted. In order to start with better solution some of them are trained.
 
-\paragraph{Fitness Function} For simplicity the fitness function is the inverse of the
+\paragraph{Fitness Function.} For simplicity the fitness function is the inverse of the
 objective value.
 
-\paragraph{Selection} although I implemented the three methods showed in class, I used montecarlo
-in the increasing phase and linear-ranking in the diversification phase, in order to
-mitigate the effect of the Population Substitution.
+\paragraph{Selection.} Although I implemented the three methods showed in class, I used \emph{montecarlo}
+in the increasing phase, because this method leads to a fast convergence; instead in the diversification phase I used the linear-ranking approach, because it
+mitigates the effect of the population substitution strategy, that 
+saves only the best elements.
 
-\paragraph{Combination} For the combination I used the ordering crossover with two randomly
+\paragraph{Combination.} For the combination I used the ordering crossover with two randomly
 chosen cutting points. In order to perform this kind of crossover I use the
 \verb|std::map<int,int>| data-structure defined in the header \verb|<map>|. This data-structure
-has very good performance\footnote{http://en.cppreference.com/w/cpp/container/map} and most importantly it is sorted by key, i.e. the first element. It is a RB-Tree.
-With 
+has very good performance\footnote{http://en.cppreference.com/w/cpp/container/map} and most importantly it is sorted by key, i.e. the first element of the pair. 
 
-\paragraph{Population Substitution} During each iteration $R$ new individuals are created. Therefore
-the new population is of size $N+R$, but only the $N$ best are mantained the other $R$ are discarded.
-This is achieved by sorting the population by increasing value (i.e. decreasing fitness).
+\paragraph{Population Substitution.} During each iteration $R$ new individuals are created. Therefore
+the new population is of size $N+R$.
+Now the population is sorted in descending order according to the fitness value. 
 
-\paragraph{Stopping Criterion} The algorithm terminates when it reaches 500 non improving iterations, i.e. 
-iterations in which there was no improvement.
+Since $R$ is much smaller than $N$ and the population
+at the start of the iteration is sorted, insertion sort algorithm
+is used. This works very efficiently (linearly) with inputs that are almost sorted.
+Instead the standard sort algorithm is (usually) quicksort that performs extremely poor with already sorted vectors $O(N+R)^2$.
+Therefore only the first $N$ elements are kept, discarding
+the last $R$ elements.
+
+\paragraph{Stopping Criterion.} The algorithm terminates when it reaches 500 non improving iterations.
+The drawback of this approach is that it is not predictable when
+the algorithm will finish. In addition sometimes the improvements are so low that it is not worth to repeat other 500 iterations.
+
 
 
 \subsection{Parameter calibration}

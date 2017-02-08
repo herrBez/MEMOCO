@@ -4,29 +4,29 @@ In order to call the solve function of the CPLEX library, previously I have to s
 and the problem, i.e. pass the data to CPLEX. This is done by means of the \verb|setupLP| function.
 Since we are interested (only) in the objective function and $y_{ij}$ variables, i.e. if the arc from $i$
 to $j$ is used, the function takes
-an additional (wrt to the given skeleton) parameter,  \verb|mapY| that is used to eventually (if the option \verb|--print| is enabled) 
-retrieve from the CPLEX API the values of those variables.
-The set up phase consists in generating the variables and the constraint to CPLEX.
+an additional\footnote{w.r.t. to the given skeleton} parameter,  \verb|mapY|. It is used to
+retrieve from the CPLEX API the values of those variables, if the option  \verb|--print| is enabled.
+The set up phase consists in generating the variables and the constraints and gives them to CPLEX.
 
-\paragraph{Variable}
+\paragraph{ Variables and costraints}
 The variables of the problem are $x_{ij}$ and $y_{ij}$ $\forall i,j \in N$.
 In order to try to render the solution more efficient the program does not pass
 to CPLEX the variables with index $i,i$. Indeed these arcs can be ignored because
 they will never be used.
 
 
-\paragraph{Note about Data-Structure} In order to render easier to refer to generated variables, i.e. the $x_{ij}$ and $y_{ij}$ variables,
-during the constraint generation phase, I used two 2D vector \verb|mapX|, \verb|mapY| that contains in position $ij$ 
+\paragraph{Note about Data-Structure} In order to render the reference to generated variables easier
+during the constraint generation phase, I used two bidimensional vector \verb|mapX|, \verb|mapY| that contains in position $ij$ 
 the corresponding CPLEX-variable index. They are filled during the variable generation phase.
 
-The maps are perfect square ($N\times N$), but the entries in position $i,i$
-are not passed to CPLEX.
-The advantage of using this approach is that $2*N$ variables are spared ($N$ for $x$ and $N$ for $y$) and the constraint
-contains in general less variables.
-The drawback is evident, when one try to write a function that reads the variables back from CPLEX, 
-in fact it is challenging to write and hard to read   as you 
-can see in the function \verb|fetch_and_print_y_variables|.
-Since this functionality was not requested, the CPLEX computational saving did not bring with it much drawbacks.
+The maps are perfect squares ($N\times N$), but the entries in position $i,i$ are not passed to CPLEX.
+The advantage of using this approach is that $2*N$ variables are spared ($N$ for $x$ and $N$ for $y$) and the constraints
+contain less variables.
+The drawback is evident: when one write a function that reads the variables back from CPLEX with this configuration, he easily realizes
+that it is challenging and hard to read.
+You can check it out in the \verb|fetch_and_print_y_variables| function.
+Since this functionality was not requested by the assignment,
+this drawback can be ignored. Thus this approach is worth the effort.
 
 
 

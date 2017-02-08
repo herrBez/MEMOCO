@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/TeX Live for SUSE Linux) (format=pdflatex 2014.11.7)  8 FEB 2017 18:00
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/TeX Live for SUSE Linux) (format=pdflatex 2014.11.7)  9 FEB 2017 00:37
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -528,20 +528,20 @@ LaTeX Warning: Unused global option(s):
 (./doc.aux)
 \openout1 = `doc.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 20.
-LaTeX Font Info:    ... okay on input line 20.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 20.
-LaTeX Font Info:    ... okay on input line 20.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 20.
-LaTeX Font Info:    ... okay on input line 20.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 20.
-LaTeX Font Info:    ... okay on input line 20.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 20.
-LaTeX Font Info:    ... okay on input line 20.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 20.
-LaTeX Font Info:    ... okay on input line 20.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 20.
-LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
 \AtBeginShipoutBox=\box29
  (/usr/share/texmf/tex/latex/graphics/color.sty
 Package: color 2005/11/14 v1.0j Standard LaTeX Color (DPC)
@@ -551,7 +551,7 @@ File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
 )
 Package color Info: Driver file: pdftex.def on input line 130.
 )
-Package hyperref Info: Link coloring ON on input line 20.
+Package hyperref Info: Link coloring ON on input line 22.
 
 (/usr/share/texmf/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
@@ -561,9 +561,9 @@ Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
 \c@section@level=\count111
 )
-LaTeX Info: Redefining \ref on input line 20.
-LaTeX Info: Redefining \pageref on input line 20.
-LaTeX Info: Redefining \nameref on input line 20.
+LaTeX Info: Redefining \ref on input line 22.
+LaTeX Info: Redefining \pageref on input line 22.
+LaTeX Info: Redefining \nameref on input line 22.
  (./doc.out)
 (./doc.out)
 \@outlinefile=\write3
@@ -597,78 +597,81 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-LaTeX Font Info:    Try loading font information for U+msa on input line 22.
+LaTeX Font Info:    Try loading font information for U+msa on input line 24.
 
 (/usr/share/texmf/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 22.
+LaTeX Font Info:    Try loading font information for U+msb on input line 24.
 
 (/usr/share/texmf/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-)
+) (./doc.toc)
+\tf@toc=\write4
+\openout4 = `doc.toc'.
 
-LaTeX Warning: No \author given.
-
-(./res/abstract.tex) (./res/intro.tex
-
-LaTeX Warning: Reference `sec:problemI' on page 1 undefined on input line 5.
+ [1
 
 
-LaTeX Warning: Reference `sec:problemII' on page 1 undefined on input line 7.
+{/usr/share/texmf/fonts/map/pdftex/updmap/pdftex.map}] (./res/abstract.tex) (./
+res/intro.tex
 
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 25.
+LaTeX Warning: Reference `sec:problemI' on page 2 undefined on input line 6.
+
+
+LaTeX Warning: Reference `sec:problemII' on page 2 undefined on input line 8.
+
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 26.
 (/usr/share/texmf/tex/latex/base/omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 25.
-) (./res/InstanceGeneration.tex
-[1
-
-
-{/usr/share/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-Overfull \hbox (1.51051pt too wide) in paragraph at lines 7--13
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 26.
+) [2] (./res/InstanceGeneration.tex
+Overfull \hbox (1.51051pt too wide) in paragraph at lines 9--15
 \OT1/cmtt/m/n/10.95 com / files / downloads / file / 81 / the _ gerber _ file _
  format _ specification . pdf$[][]\OT1/cmr/m/n/10.95 . This
  []
 
-) (./res/problemI.tex
-Overfull \hbox (60.59622pt too wide) in paragraph at lines 30--1
-\OT1/cmr/m/n/10.95 pect the pro-gram writes in the files []\OT1/cmtt/m/n/10.95 
-/tmp/tsp_instance_<N>.gbr \OT1/cmr/m/n/10.95 and []\OT1/cmtt/m/n/10.95 /tmp/tsp
-_instance_<N>.pbm[][][][][]
+
+LaTeX Warning: Reference `' on page 3 undefined on input line 18.
+
+
+Overfull \hbox (107.86377pt too wide) in paragraph at lines 32--36
+\OT1/cmr/m/n/10.95 In or-der to vi-su-al-ize the in-stances the files []\OT1/cm
+tt/m/n/10.95 /tmp/tsp_instance_<N>.gbr \OT1/cmr/m/n/10.95 and []\OT1/cmtt/m/n/1
+0.95 /tmp/tsp_instance_<N>.pbm[][][][][]\OT1/cmr/m/n/10.95 are
  []
 
-[2]) (./res/problemII.tex [3]
-Overfull \hbox (4.76743pt too wide) in paragraph at lines 20--25
-\OT1/cmr/m/n/10.95 sen cut-ting points. In or-der to per-form this kind of cros
-sover I use the []\OT1/cmtt/m/n/10.95 std::map<int,int>
+[3]) [4] (./res/problemI.tex) [5] (./res/problemII.tex
+Overfull \hbox (20.88826pt too wide) in paragraph at lines 21--25
+\OT1/cmr/m/n/10.95 cho-sen cut-ting points. In or-der to per-form this kind of 
+crossover I use the []\OT1/cmtt/m/n/10.95 std::map<int,int>
  []
 
-)
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 27.
- [4]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 27.
+) [6] [7] (./res/result.tex) [8] (./res/conclusion.tex)
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 38.
+ [9]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 38.
  (./doc.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 27.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 27.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 38.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 38.
 Package rerunfilecheck Info: File `doc.out' has not changed.
-(rerunfilecheck)             Checksum: C9256625F6A35C258D7833A3F54DA55C;466.
+(rerunfilecheck)             Checksum: 3495F11C871A9885B556DBDF5D3A76FA;819.
 
 
 LaTeX Warning: There were undefined references.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 27.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 38.
  ) 
 Here is how much of TeX's memory you used:
- 7241 strings out of 493315
- 105795 string characters out of 6145893
- 216244 words of memory out of 5000000
- 10567 multiletter control sequences out of 15000+600000
- 15034 words of font info for 59 fonts, out of 8000000 for 9000
+ 7291 strings out of 493315
+ 106537 string characters out of 6145893
+ 216310 words of memory out of 5000000
+ 10593 multiletter control sequences out of 15000+600000
+ 15380 words of font info for 60 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
- 38i,8n,47p,319b,325s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 38i,8n,47p,334b,325s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texmf/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texmf
 /fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf/fonts/type1/public
 /amsfonts/cm/cmmi8.pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmr10.p
@@ -677,11 +680,12 @@ fb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf
 msfonts/cm/cmr8.pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmr9.pfb><
 /usr/share/texmf/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/share/texmf/
 fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf/fonts/type1/public/
-amsfonts/cm/cmtt10.pfb>
-Output written on doc.pdf (4 pages, 134913 bytes).
+amsfonts/cm/cmti10.pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmtt10.
+pfb>
+Output written on doc.pdf (9 pages, 159542 bytes).
 PDF statistics:
- 129 PDF objects out of 1000 (max. 8388607)
- 110 compressed objects within 2 object streams
- 27 named destinations out of 1000 (max. 500000)
- 65 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 202 PDF objects out of 1000 (max. 8388607)
+ 177 compressed objects within 2 object streams
+ 41 named destinations out of 1000 (max. 500000)
+ 113 words of extra memory for PDF output out of 10000 (max. 10000000)
 

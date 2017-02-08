@@ -72,6 +72,29 @@ in 38.0458 seconds (user time)
 in 202.675 seconds (CPU time)
 Objval: 629.8
 
+--TSP CIRCLE 48 --
+Problem Size N48
+in 23.3467 seconds (user time)
+in 139.68 seconds (CPU time)
+Objval: 1668.59
+Problem Size N48
+in 29.2159 seconds (user time)
+in 171.915 seconds (CPU time)
+Objval: 1668.59
+Problem Size N48
+in 27.7053 seconds (user time)
+in 162.249 seconds (CPU time)
+Objval: 1668.59
+Problem Size N48
+in 27.2985 seconds (user time)
+in 164.548 seconds (CPU time)
+Objval: 1668.59
+Problem Size N48
+in 26.9964 seconds (user time)
+in 158.376 seconds (CPU time)
+Objval: 1668.59
+
+
 
 
 

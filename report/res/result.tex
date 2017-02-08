@@ -1,0 +1,29 @@
+\section{Result}
+The following results are depending also on the HW of the machine used.
+The following tests were run on a  Intel(R) Core(TM) i7-3610QM CPU @ 2.30GHz.
+In order to show the differences between the two implementations I selected some files
+that you can find in the \verb|SAMPLE| directory.
+I wrote a script \verb|benchmark.sh| that runs
+each instance of the problem ten times and then it computes the
+user time\footnote{In general the CPLEX API cpu time is much bigger(~7 time) than the genetic algorithm time
+because CPLEX is multithreaded, the implementation of the second algorithm use only one thread}.
+In order to test this problem I used the 
+following instances 
+\begin{itemize}
+	\item TSP12, the tsp instance with 12 elements given during the class;
+	\item TSP60, the tsp instance with 60 elements given during the class;
+	\item REALWORLD, the real-world tsp instance, with data extrapolated from a real
+	\verb|.gbr| file mentioned above;
+	\item CIRCLE48, an instance generated with the InstanceGenerator that is formed by
+	four very distant circles composed by 12 elements each;
+	\item CIRCLE3-45 Circle instances 3 to 45;
+	\item RANDOM1 a random instance, in order to show the general-purpose goodness of the algorithm;
+	\item RANDOM2 a random instance, in order to show the general-purpose goodness of the algorithm;
+\end{itemize}
+
+\subsection{Result - First Assignment}
+
+
+
+
+\section{Result - Second Assignment}
