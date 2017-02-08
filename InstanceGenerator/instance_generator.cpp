@@ -460,6 +460,7 @@ void generateInstance(int N, char opt){
 	
 	sprintf(tmpBuffer, "tsp_instance_%d_%s", N, type);
 	printBinaryPBM(size, arr, N, tmpBuffer);
+	printGerberFile(arr, N, filename);
 	cost = calculateDistance(N, arr);
 	printDatFile(cost, N, tmpBuffer);
 	delete[] arr;

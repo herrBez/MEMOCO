@@ -15,13 +15,13 @@ array=`seq 3 48`
 #	InstanceGenerator/instance_generator ${i} c
 #done
 
-for i in {49..50}; do
+for i in {50..50}; do
 	echo "Generating instance with ${i} elements divided in 4 circles"
 	InstanceGenerator/instance_generator ${i} c
 done
 
 echo "set terminal png"
-for i in {49..50}; do 
+for i in {50..50}; do 
 	#echo "Processing ${i} random"
 	#ExamExercise/main /tmp/tsp_instance_${i}_random.dat -b >> benchmark_random.txt
 	echo "Processing ${i} circle"

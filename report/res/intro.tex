@@ -1,11 +1,10 @@
 
 \section{Introduction}
-The aim of this project was to familiarize with different approach for the solution of a well-known combinatorial problem, in
-particular the assignment required to solve the problem with two different approaches:
+The aim of this project was to familiarize with different approaches for the solution of a well-known combinatorial problem, especially:
 \begin{enumerate}
-	\item An exact solution using the CPLEX API \url{https://www-01.ibm.com/software/commerce/optimization/cplex-optimizer/}\ref{sec:problemI}
+	\item An exact solution using the CPLEX API \ref{sec:problemI}
 	
-	\item A metaheuristic. \ref{sec:problemII}
+	\item A metaheuristic: a genetic algorithm and simulated annealing were implemented. \ref{sec:problemII}
 \end{enumerate}
 \subsection{Problem description}
 The assignment of the problem was the following:
@@ -19,9 +18,6 @@ The assignment of the problem was the following:
 \end{quote}
 This problem can be viewed as a particular instance of the TSP problem: the salesman is represented by the 
 drill and the cities are represented by the holes.
-Since the problem is NP-hard, the exact method does not halt in a reasonable time. Therefore the metaheuristic approach is more convenient exspecially when $N$ is big, i.e. bigger than $60$.
+Since the problem is NP-hard, the exact method does not halt in a reasonable amount of time when $N$ increases, i.e. with inputs bigger than $60$.
  
-\subsection{Problem Formalization}
-\begin{itemize}
-	\item $y_{ij}$ 1 if the edge between hole $i$ and $j$ is used.
-\end{itemize}
+

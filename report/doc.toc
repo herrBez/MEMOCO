@@ -1,11 +1,10 @@
 \contentsline {paragraph}{Abstract}{2}{section*.2}
 \contentsline {section}{\numberline {1}Introduction}{2}{section.1}
 \contentsline {subsection}{\numberline {1.1}Problem description}{2}{subsection.1.1}
-\contentsline {subsection}{\numberline {1.2}Problem Formalization}{2}{subsection.1.2}
 \contentsline {section}{\numberline {2}Instance Creation}{3}{section.2}
 \contentsline {subsection}{\numberline {2.1}Provided}{3}{subsection.2.1}
 \contentsline {subsection}{\numberline {2.2}Gerber File}{3}{subsection.2.2}
-\contentsline {subsection}{\numberline {2.3}Istance Generator}{3}{subsection.2.3}
+\contentsline {subsection}{\numberline {2.3}Istance Generator}{4}{subsection.2.3}
 \contentsline {section}{\numberline {3}First Assignment}{5}{section.3}
 \contentsline {paragraph}{Variables and costraints}{5}{section*.3}
 \contentsline {paragraph}{Note about Data-Structure}{5}{section*.4}
