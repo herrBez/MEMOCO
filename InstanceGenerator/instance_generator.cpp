@@ -16,7 +16,7 @@
 #include <stdlib.h>
 #include <array>
 #include <random>
-
+#include <string.h>
 #include <string>
 		
 using namespace std;
@@ -231,7 +231,7 @@ int get_option(int argc, char * argv[], char * opt){
 	stringstream ss;
 	int N = 0;
 	if(argc < 2){
-		cerr << "Usage: " << argv[0] << " N <r|q|c> [size]" << endl;
+		cerr << "Usage: " << argv[0] << " N <r|q|c>" << endl;
 		exit(EXIT_FAILURE);
 	}
 	else if(argc < 3){
@@ -246,7 +246,15 @@ int get_option(int argc, char * argv[], char * opt){
 	} else {
 		cerr << " Too much arguments given. Exit ... " << endl;
 	}
-	
+	switch(*opt){
+		case 'r':
+		case 'q':
+		case 'c': break;
+		default:
+			cerr << "Invalid option '" << * opt << "' given" << endl;
+			cerr << "Usage: " << argv[0] << " N <r|q|c>" << endl;
+			exit(EXIT_FAILURE);
+	}
 	return N;
 }
 
@@ -434,43 +442,30 @@ void generateInstance(int N, char opt){
 	char * type = new char[32];
 	switch(opt){
 		case 'r': 
-			cout << "genereating random instance" << endl; 
 			arr = generateRandomInstance(N, size);
 			strcpy(type, "random");
-			
-			printBinaryPBM(size,arr,N, tmpBuffer);
-			
-			printGerberFile(arr, N, tmpBuffer);
-			cost = calculateDistance(N, arr);
-			printDatFile(cost, N, tmpBuffer);
 			break;
 		case 'q': 
-			cout << "generating instance with square/rectangles" << endl;
 			arr = generateSquareInstance(N, size);
-			strcpy(type, "square");
-
-			printBinaryPBM(size, arr, N, tmpBuffer);
-			printGerberFile(arr, N, tmpBuffer);
-			cost = calculateDistance(N, arr);
-			printDatFile(cost, N,tmpBuffer);
-			
+			strcpy(type, "square");			
 			break;
 		case 'c': 
-			cout << "generating instance with circles" << endl; 
-			sprintf(tmpBuffer, "tsp_instance_%d_%s", N, "circle");
+			strcpy(type, "circle");			
 			arr = generateCircleInstance(N, size);
-			strcpy(type, "circle");
-			
 			break;
 		default: 
 			
+			exit(EXIT_FAILURE);
 	}
+	
+	sprintf(tmpBuffer, "tsp_instance_%d_%s", N, type);
 	printBinaryPBM(size, arr, N);
 	cost = calculateDistance(N, arr);
 	printDatFile(cost, N, tmpBuffer);
 	delete[] arr;
 	delete[] cost;
 	delete[] tmpBuffer;
+	delete[] type;
 }
 
 /**

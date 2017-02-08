@@ -11,7 +11,7 @@
 #include "TSP.h"
 #include "TSPSolution.h"
 #include "TSPSolverGA.h"
-//#include "TSPSolver.h"
+
 using namespace std;
 // error status and messagge buffer
 int status;
@@ -25,6 +25,7 @@ char errmsg[255];
  */
 int main (int argc, char const *argv[])
 {
+	srand(time(NULL));
 	bool exc_raised = false;
 	try
 	{
@@ -44,17 +45,34 @@ int main (int argc, char const *argv[])
 		//tspSolver.initRnd(aSolution);
 		vector < TSPSolution > initialPopulation;
 		int S = 15; //=POPULATION SIZE
+		//It returns the initial population sorted by decreasing fitness
 		tspSolver.getInitPopulation(tspInstance, initialPopulation, S);
 
 		cout << "INIT POPULATION FITTEST = ";
-		initialPopulation[0].print();
-		cout << endl;
+		if(tspInstance.n < 40){
+			initialPopulation[0].print();
+			cout << endl;
+		} else {
+			cout << "Init Best" << endl;
+			cout << initialPopulation[0].value << endl;
+			cout << initialPopulation[1].fitness << endl;
+		}
+		
 		TSPSolution bestSolution(tspInstance);
 
-		tspSolver.solve(tspInstance, initialPopulation, bestSolution); /// new parameters for TS
-		cout << "BEST SOLUTION " << endl;
-		bestSolution.print();
-		cout << endl;
+		tspSolver.solve(tspInstance, initialPopulation, bestSolution); 
+		
+		
+		if(tspInstance.n < 40){
+			cout << "BEST SOLUTION " << endl;
+			bestSolution.print();
+			cout << endl;
+		} else {
+			cout << "Best Solution" << endl;
+			cout << bestSolution.value << endl;
+			cout << bestSolution.fitness << endl;
+		}
+		
 		cout << (bestSolution.isFeasible()?"FEASIBLE":"NOT FEASIBLE");
 		//t2 = clock();
 		//gettimeofday(&tv2, NULL);

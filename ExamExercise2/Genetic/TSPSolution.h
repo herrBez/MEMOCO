@@ -29,6 +29,9 @@ class TSPSolution {
 	TSPSolution(){
 	}
   
+	
+
+  
 	/**
 	 * check whether the solution is feasible or not, used for debug purposes and test
 	 * in order to check if it was all OK.
@@ -46,7 +49,13 @@ class TSPSolution {
 		return true;
 	}
 
-  
+	void reserve(const TSP & tsp){
+		sequence.reserve(tsp.n + 1);
+		for (int i = 0; i < tsp.n; ++i) {
+		  sequence.push_back(i);
+		}
+		sequence.push_back(0);
+	}
 	  /** build a standard solution as the sequence <0, 1, 2, 3 ... n-1, 0>
 		* @param tsp TSP instance
 		* @return the created TSP instance
