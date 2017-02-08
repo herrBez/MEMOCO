@@ -1,0 +1,79 @@
+-- REAL WORLD --
+Problem Size N53
+in 27.131 seconds (user time)
+in 154.024 seconds (CPU time)
+Objval: 2.22811e+08
+mirko@linux:~/UniPD/2Semestre/MEMOC/ExamExercise> ./main ../Sample/RealWorldExample.dat 
+Problem Size N53
+in 30.8588 seconds (user time)
+in 175.062 seconds (CPU time)
+Objval: 2.22811e+08
+mirko@linux:~/UniPD/2Semestre/MEMOC/ExamExercise> ./main ../Sample/RealWorldExample.dat 
+Problem Size N53
+in 30.4721 seconds (user time)
+in 183.536 seconds (CPU time)
+Objval: 2.22811e+08
+mirko@linux:~/UniPD/2Semestre/MEMOC/ExamExercise> ./main ../Sample/RealWorldExample.dat 
+Problem Size N53
+in 30.6561 seconds (user time)
+in 184.605 seconds (CPU time)
+Objval: 2.22811e+08
+Problem Size N53
+in 25.0468 seconds (user time)
+in 146.687 seconds (CPU time)
+Objval: 2.22811e+08
+
+-- TSP 12 --
+Problem Size N12
+in 0.192206 seconds (user time)
+in 0.457204 seconds (CPU time)
+Objval: 66.4
+Problem Size N12
+in 0.146278 seconds (user time)
+in 0.321336 seconds (CPU time)
+Objval: 66.4
+Problem Size N12
+in 0.144007 seconds (user time)
+in 0.315667 seconds (CPU time)
+Objval: 66.4
+Problem Size N12
+in 0.142494 seconds (user time)
+in 0.318639 seconds (CPU time)
+Objval: 66.4
+Problem Size N12
+in 0.15627 seconds (user time)
+in 0.331342 seconds (CPU time)
+Objval: 66.4
+Problem Size N12
+in 0.159043 seconds (user time)
+in 0.471697 seconds (CPU time)
+Objval: 66.4
+
+
+--TSP 60 --
+Problem Size N60
+in 30.8763 seconds (user time)
+in 160.52 seconds (CPU time)
+Objval: 629.8
+Problem Size N60
+in 38.5821 seconds (user time)
+in 200.861 seconds (CPU time)
+Objval: 629.8
+Problem Size N60
+in 40.5445 seconds (user time)
+in 209.546 seconds (CPU time)
+Objval: 629.8
+Problem Size N60
+in 38.2818 seconds (user time)
+in 203.713 seconds (CPU time)
+Objval: 629.8
+Problem Size N60
+in 38.0458 seconds (user time)
+in 202.675 seconds (CPU time)
+Objval: 629.8
+
+
+
+
+
+

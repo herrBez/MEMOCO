@@ -29,12 +29,12 @@ int main (int argc, char const *argv[])
 	bool exc_raised = false;
 	try
 	{
-		if (argc < 2) throw runtime_error("usage: %s filename.dat");  /// new parameters for TS
-		//srand(time(NULL));
+		if (argc < 3) throw runtime_error("Usage: %s filename.dat");  /// new parameters for TS
+		
 
 		TSP tspInstance; 
 		tspInstance.read(argv[1]);
-		
+		S
 
 		TSPSolverGA tspSolver;
 		//tspSolver.initRnd(aSolution);
