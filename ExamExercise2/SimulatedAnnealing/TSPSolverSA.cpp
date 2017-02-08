@@ -8,7 +8,6 @@ bool TSPSolverSA::solve ( const TSP& tsp , const TSPSolution& initSol , TSPSolut
 	TSPSolution currSol(initSol);
 	bestSol = initSol;
 	int acceptedWorseningSolution = 0;
-   
     double T = start_temperature;
     double MIN_TEMPERATURE = 1.0;
     int iterationsAtConstantT = 0;

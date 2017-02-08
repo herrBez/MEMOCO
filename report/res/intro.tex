@@ -1,0 +1,26 @@
+\section{Introduction}
+The aim of this project was to familiarize with different approach for the solution of a well-known combinatorial problem, in
+particular the assignment required to solve the problem with two different approaches:
+\begin{enumerate}
+	\item An exact solution using the CPLEX API \url{https://www-01.ibm.com/software/commerce/optimization/cplex-optimizer/}\ref{sec:problemI}
+	
+	\item A metaheuristic. \ref{sec:problemII}
+\end{enumerate}
+\subsection{Problem description}
+The assignment of the problem was the following:
+\begin{quote}
+	A company produces boards with holes used to build electric frames. Boards are positioned over a 
+	machines and a drill moves over the board, stops at the desired positions
+	and makes the holes. Once a board is drilled, a new board is positioned and the process is
+	iterated many times. Given the position of the holes on the board, the company asks us
+	to determine the hole sequence that minimizes the total drilling time, taking into account
+	that the time needed for making an hole is the same and constant for all the holes.
+\end{quote}
+This problem can be viewed as a particular instance of the TSP problem, in which the salesman is represented by the 
+drill and the cities are represented by the holes.
+Because of the NP-Hardness of this problem it is a good candidate for an implementation of a metaheuristic approach,
+particularly when the size of the problem, i.e. the number of holes becomes bigger.
+\subsection{Problem Formalization}
+\begin{itemize}
+	\item $y_{ij}$ 1 if the edge between hole $i$ and $j$ is used.
+\end{itemize}

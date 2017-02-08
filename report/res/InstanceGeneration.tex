@@ -1,0 +1,33 @@
+\section{Instance Creation}
+To test the performance of the algorithms and compare them one fundamental step
+was to provide some "good instances".
+In this section I will describe how I obtain the isntances:
+\subsection{Gerber File}
+
+In order to represent PBC there is a standard format, that is called gerber, which extension is \verb|.gbr|.
+The specification of this file format can be found at: \url{https://www.ucamco.com/files/downloads/file/81/the_gerber_file_format_specification.pdf}. This format
+contains - among many (for us not useful) information (such as lines, drill size, interpolation mode, board size, etc.) -
+the positions of the drill points.
+The parser - written with the collaboration of my colleague Sebastiano Valle- parses only the points position, It can be found in the folder GerberParser. It can be opened in each browser, because it is written in javascript wrapped in an HTML file, index.html.
+You can upload a file using the button "upload" and it returns a \verb|.dat| file containing the euclidean distance between the holes.
+
+One difficulty with this approach was to find real instances (for free) on the web. I did not succeed, but my brother provides me a real example file, that I named
+\verb|RealWorldExample.gbr|. In order to view it "graphically" you can use this online tool \url{http://www.gerber-viewer.com/},
+it consists of 53 points.
+
+\subsection{Istance Generator}
+
+In order to provide some particular instances I wrote a program that can be found in the folder
+\verb|InstanceGenerator|. The usage is very simple: you have to provide N, the number of points and
+one letter between \verb|r,c,q| which stands respectively for random, circle, square:
+\begin{itemize}
+	\item If the option random is provided, it creates randomly $N$ points in a square-shaped board of dimension $2*N$.
+	\item if the option circle is provided, it creates 4 circles of $\lfloor{N/4}\rfloor$ points in the top-left, top-right, bottom-left, bottom-right corner
+	of the drill board. If $N\ \text{mod} \ 4 = a$ with $a \neq 0$ then the circles $0..a$ will have $\lfloor{N/4}\rfloor + 1$ points.
+	\item if the option square is provided, it creates 4 square of $\lfloor{N/4}\rfloor$ points in the top-left, top-right, bottom-left,
+	bottom-right corner of the drill board. If $N$ is not a multiple of $4$ it tries to put the extra points somewhere inside the square.
+\end{itemize}
+In order to see if the instances created are well-formed and are exactly what we would expect the program writes in the files
+\verb!/tmp/tsp_instance_<N>.gbr! and \verb!/tmp/tsp_instance_<N>.pbm!\footnote{This file format is a good choice because it is easy to encode 1 bit corresponds to 1 pixel, with 0 = white and 1 = black and is portable}  the points in the specified format.
+The latter file can be opened by each image viewer.
+The instance generator program compute also a \verb|.dat| file containing the costs from drill point 1 to drill point 2.

@@ -1,0 +1,218 @@
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	</head>
+<body>
+	<h1>Gerber File Parser</h1>
+	    
+	<p>Carica il file in formato gerber (.gbr):</p>
+
+	<input type="file" id="files" name="files[]" multiple />
+	
+	<div id="select-container">
+
+	</div>
+	<div id="select-header">
+
+	</div>
+	<div id="content">
+
+	</div>
+	<div id="result">
+
+	</div>
+	
+	
+	<div id="CanvasContainer">
+	<button onclick="ZoomIn(false)">Zoom In Exponentially</button>
+	<button onclick="ZoomIn(true)">Zoom In Slightly</button>
+	<button onclick="ZoomOut(false)">Zoom Out Exponentially</button> 
+	<button onclick="ZoomOut(true)">Zoom Out Slightly</button> 
+
+	<br>
+	
+	
+	<div id="CanvasGoesHere"></div>
+	</div>
+	<script>
+	
+		
+		function handleFileSelect(evt) {
+			var files = evt.target.files; // FileList object
+			var output = [];
+			var f = files[0];
+			console.log(f.name);
+			var reader = new FileReader();
+			reader.onload = function(e){
+				var text = reader.result;
+				processText(text);
+			}
+			reader.readAsText(f);
+		}
+
+	
+	
+	
+	
+	function retrieveXY(currentX, currentY, s){
+		var X;
+		var Y;
+		//D works in this case only as a sentinel character.
+		var patternXY 		= new RegExp("\\bX(-|)[0-9]*Y(-|)[0-9]*D.*$");
+		var patternXOnly 	= new RegExp("\\bX(-|)[0-9]*D.*$");
+		var patternYOnly	= new RegExp("\\bY(-|)[0-9]*D.*$");
+		
+		var end = s.indexOf('D');
+		
+		if(patternXY.test(s)){
+			var posCharY = s.indexOf('Y');
+			X = parseInt(s.substring(1, posCharY, 10));
+			Y = parseInt(s.substring(posCharY + 1, end, 10));
+			console.log("1" + s);
+		} 
+		else if(patternXOnly.test(s)){
+			X = parseInt(s.substring(1, end, 10));
+			Y = currentY;
+			console.log("2" + s);
+		} else if(patternYOnly.test(s)){
+			X = currentX;
+			Y = parseInt(s.substring(1, end, 10));
+			console.log("3\t" + s);
+
+		} 
+		else {
+			console.log("Not Recognized ::::::: " + s);
+		}
+		
+		return [X, Y];
+	}
+	
+	
+	
+	
+	
+	
+	function processText(text)
+	{
+		var allText = text;
+		var lines = allText.split("\n");
+
+		//Pattern to recognize
+		var patternHole = new RegExp("\\b.*D03\\*.*$");
+		var patternMove = new RegExp("\\b.*D02\\*.*$");
+		var patternLine = new RegExp("\\b.*D01\\*.*$");
+		var patternChangeDrill = new RegExp("\\bD[0-9]*.\\*.*$");
+		var patternFinish = new RegExp("\\bM[0-9]*.\\*.*$");
+		
+		
+		var currentX = 0;
+		var currentY = 0;
+		var drillSize;
+
+		holes 		= new Array();
+		segments 	= new Array();
+	
+		
+		
+		//Ignoring the attributes because we are interested only in points position
+		for(var i = 0; i < lines.length; i++){
+			lines[i] = lines[i].trim();
+			var code = lines[i].charAt(0);
+
+
+			if(code != '%' && lines[i].length > 0 ){	 //It is neither empty nor an attribute
+				if(patternHole.test(lines[i])){
+					newCoordinate = retrieveXY(currentX, currentY, lines[i]); 
+					var X = newCoordinate[0];
+					var Y = newCoordinate[1];
+					currentX = X;
+					currentY = Y;
+					holes.push([X, Y, drillSize]);
+					console.log(lines[i] + ":: Drill point: (" + X + "," + Y + ")");
+				} 
+				else if(patternMove.test(lines[i])){
+					newCoordinate = retrieveXY(currentX, currentY, lines[i]);
+					var X = newCoordinate[0];
+					var Y = newCoordinate[1];
+					currentX = X;
+					currentY = Y;
+					console.log("Moved cursor to: (" + X + "," + Y + ")");
+				}
+				else if(patternLine.test(lines[i])){
+					newCoordinate = retrieveXY(currentX, currentY, lines[i]);
+					var X = newCoordinate[0];
+					var Y = newCoordinate[1];
+					segments.push([[currentX, currentY], [X, Y], drillSize]);
+					console.log("Segment: [(" + currentX + "," + currentY  +")(" + X + "," + Y + ")]");					
+					currentX = X;
+					currentY = Y;
+					
+				}
+				else if(code == 'D' && patternChangeDrill.test(lines[i])){
+					drillSize = parseInt(lines[i].substring(1, lines[i].indexOf('*')), 10);
+					console.log("Drill size is set to " + drillSize);
+				} 
+				else if(code == 'G') {
+					console.log("Doing something with interpolation. Not My problem!"); //
+				}
+				else if(code == 'M' && patternFinish.test(lines[i])){
+					console.log("Finish. I will break the cycle. Adieu!");
+					break;
+				} else {
+					console.log("Not recognized : " + lines[i]);
+				}
+
+			} else if(code == '%'){
+				console.log("It is an attribute. Not My Job yet");
+			}
+			else {
+				console.log("I cannot get it!\t" + lines[i]);
+			}
+		}
+		
+	
+		
+		
+		
+		var content = holes.length.toString() + "\n";
+		for(var i = 0; i < holes.length; i++){
+			for (var j = 0; j < holes.length; j++) {
+				if (i == j)
+					content = content + "0";
+				else{
+						var sqrX = Math.pow(holes[i][0]-holes[j][0],2);
+						var sqrY = Math.pow(holes[i][1]-holes[j][1],2);
+						content = content + Math.round(Math.sqrt(sqrX + sqrY));
+				}
+				if (j != holes.length - 1)
+					content = content + "\t";
+			}
+			content = content + "\n";
+			console.log(holes[i]);
+		}
+		$('#result').html("Summary:</br>" + replaceAll(content,"\n", "</br>"));
+		download("Holes_Data",content);
+	}
+	
+/* http://stackoverflow.com/questions/1144783/how-to-replace-all-occurrences-of-a-string-in-javascript */
+function replaceAll(str, find, replace) {
+  return str.replace(new RegExp(find, 'g'), replace);
+}
+
+function download(filename, text) {
+  var element = document.createElement('a');
+  element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+  element.setAttribute('download', filename);
+
+  element.style.display = 'none';
+  document.body.appendChild(element);
+
+  element.click();
+
+  document.body.removeChild(element);
+}
+document.getElementById('files').addEventListener('change', handleFileSelect, false);
+</script>
+</body>
+</html>

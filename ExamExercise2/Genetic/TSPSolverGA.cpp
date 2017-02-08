@@ -22,6 +22,13 @@ TSPSolution * TSPSolverGA::ricombination(TSP tsp, vector< TSPSolution > populati
 		int end = max(rI, rII);
 		getOffSpring(tsp, newGen[i], population[parent1], population[parent2], start, end);
 		getOffSpring(tsp, newGen[i+1], population[parent2], population[parent1], start, end);
+		if(rand() % 100 < 10){//Probability 20%
+			localSearch(tsp, newGen[i]);
+		}
+		if(rand() % 100 < 10) {//Probability 20%
+			localSearch(tsp, newGen[i+1]);
+		}
+		
 	}
 	return newGen;
 }
@@ -73,10 +80,15 @@ bool TSPSolverGA::solve ( const TSP& tsp , vector< TSPSolution > & currPopulatio
 		/* Select R parents */	
 		int * setOfParents = selection(currPopulation, R);
 		/* Returns the new generation, composed of R new individuals. It perform also the mutation*/
-		TSPSolution * r = ricombination(tsp, currPopulation, setOfParents, R);
+		TSPSolution * newGen = ricombination(tsp, currPopulation, setOfParents, R);
+		/* Perform some mutation in order to maintain the diversity */
+		mutation(newGen, tsp, R, 0.1);
+		/* Perform a local search on some randomly choosen individuals */
+		train(newGen, tsp, R, 0.2);
+		
 		/* Add the children to the population */
 		for(int i = 0; i < R; i++){
-			currPopulation.push_back(r[i]);
+			currPopulation.push_back(newGen[i]);
 		}
 		
 		/* Sort the population */		
@@ -95,7 +107,7 @@ bool TSPSolverGA::solve ( const TSP& tsp , vector< TSPSolution > & currPopulatio
 			bestValue = currPopulation[0].value;
 			nonImprovingIterations = 0;
 		 }
-		 delete[] r;
+		 delete[] newGen;
 		 delete[] setOfParents;
 	}
 	bestSol = currPopulation[0];

@@ -19,7 +19,40 @@ using namespace std;
 
 class TSPSolverGA {
 private:
-	void localSearch();
+	void localSearch(TSP tsp, TSPSolution & sol){
+		TSPSolution currSol (sol);
+		TSPSolution tmpSol (tsp);
+		for(int i = 0; i < 1000; i++){
+			/* Finding a random neighbour by swapping 2 elements */
+			int a = 1 + (rand() % (tsp.n-1)); // Index between [1, n-1]
+			int b = 1 + (rand() % (tsp.n-1)); // Index between [1, n-1]
+			tmpSol = currSol.swap(tsp, a, b);
+			if(tmpSol.value < currSol.value)
+				currSol = tmpSol;
+		}
+		sol = currSol;
+	}
+	
+	void train(TSPSolution * sol, TSP tsp, const int R, double probability = 0.1){
+		for(int i = 0; i < R; i++){
+			double p = ((double) rand()) / RAND_MAX;
+			if(p < probability){
+				localSearch(tsp, sol[i]);
+			}
+		}
+	}
+	
+	
+	void mutation(TSPSolution * sol, TSP tsp, int R, double probability = 0.1){
+		for(int i = 0; i < R; i++){
+			double r = ((double)rand()) / RAND_MAX;
+			if(r < probability){
+				int a = (rand() % (tsp.n-2))+1;
+				int b = (rand() % (tsp.n-2))+1;
+				sol[i].swap(tsp, a, b);
+			}
+		}
+	}
 	/**
 	 * perfrom a montecarlo selection 
 	 * p_i := f_i / sum_{k=0}^{N} f_k
@@ -228,6 +261,7 @@ public:
 
 		}
 		
+		
 		/* 0 n-1 .. 2 1 0 */
 		int len = tmp.sequence.size()-1;
 		for(int i = 0; i < len; i++){
@@ -272,15 +306,7 @@ public:
 	 */
 	void getOffSpring(TSP tsp, TSPSolution & child, TSPSolution& parent1,  TSPSolution& parent2, 
 			int start, int end) {
-		#ifdef VERBOSE
-		cout << "OFFSPRING GENERATION -- ORDERED CROSSOVER " << start << " " << end  << endl;
 		
-		parent1.print();
-		cout << endl;
-		parent2.print();
-		cout << endl;
-		cout << "----------------------" << endl;
-		#endif
 		
 		child = parent1;
 		/* 
@@ -303,41 +329,23 @@ public:
 			} 
 			indexes.insert(make_pair(key, val));
 		}
-		#ifdef SUPER_VERBOSE
-		std::for_each(indexes.begin(), indexes.end(), [] (std::pair<int, int> a) 
-		{ 
-			cout << "(" << a.first << "," << a.second <<")" << endl;
-		});
-		#endif
+		
 		int i = start;
 		for (std::map<int,int>::iterator it=indexes.begin(); it!=indexes.end(); ++it)
 			child.sequence[i++] = it->second;
 		
+		child.value = evaluate(child, tsp);
+		
 		if((double) rand() / RAND_MAX <= 1){
-			#ifdef VERBOSE
-			cout << "MUTATION" << endl;
-			#endif
+			
 			int a = (rand() % (child.sequence.size() - 2)) + 1;
 			int b = (rand() % (child.sequence.size() - 2)) + 1;
-			int tmp = child.sequence[a];
-			child.sequence[a] = child.sequence[b];
-			child.sequence[b] = tmp;
+			child.swap(tsp, a, b);
 		}
 		
-		#ifdef VERBOSE
-		cout << endl;
-		child.print();
-		cout << endl;
-		cout << endl;
-		cout << "END -- ORDERED CROSSOVER " << endl;
-		#endif
-		child.value = evaluate(child, tsp);
-		/* Calculating the value from the father. Without calculating the whole sum (end-start) < N 
-		for (int i = 0; i <= (end - start + 1); i++) {
-			child.value -= tsp.cost[parent1.sequence[start + i - 1]][parent1.sequence[start	+ i]];
-			child.value += tsp.cost[child.sequence[start + i - 1]][child.sequence[start + i]];
-		}*/
 		child.fitness = 1.0 / child.value;
+
+		
 	}
 
 	/**

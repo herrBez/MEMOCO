@@ -222,7 +222,7 @@ void fetch_and_print_y_variables(CEnv env, Prob lp, int N, vector< vector<int> >
 	int begin =  mapY[0][1]; //First y index
 	int end = mapY[N-1][N-2]; //Last y index
 	int length = end - begin + 1;
-	double * y = (double *) malloc(sizeof(double) * length);
+	double * y = new double[length];
 	CHECKED_CPX_CALL( CPXgetx, env, lp, y, begin, end);
 	cout << "OPTIMAL SOLUTION = ";
 	int k = 0;
@@ -255,7 +255,7 @@ void fetch_and_print_y_variables(CEnv env, Prob lp, int N, vector< vector<int> >
 	}
 	
 	cout << endl;
-	free(y);
+	delete[] y;
 }
 
 

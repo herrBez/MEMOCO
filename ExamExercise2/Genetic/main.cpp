@@ -34,12 +34,7 @@ int main (int argc, char const *argv[])
 
 		TSP tspInstance; 
 		tspInstance.read(argv[1]);
-		//TSPSolution aSolution(tspInstance);
-		//aSolution.print();
-		//clock_t t1,t2;
-		//t1 = clock();
-		//struct timeval  tv1, tv2;
-		// gettimeofday(&tv1, NULL);
+		
 
 		TSPSolverGA tspSolver;
 		//tspSolver.initRnd(aSolution);
@@ -54,13 +49,25 @@ int main (int argc, char const *argv[])
 			cout << endl;
 		} else {
 			cout << "Init Best" << endl;
-			cout << initialPopulation[0].value << endl;
-			cout << initialPopulation[1].fitness << endl;
+			cout << "Objval" << initialPopulation[0].value << endl;
+			
 		}
+		
 		
 		TSPSolution bestSolution(tspInstance);
 
+		
+		clock_t t1,t2;
+		t1 = clock();
+		struct timeval  tv1, tv2;
+		gettimeofday(&tv1, NULL);
+
+
 		tspSolver.solve(tspInstance, initialPopulation, bestSolution); 
+		
+		
+		t2 = clock();
+		gettimeofday(&tv2, NULL);
 		
 		
 		if(tspInstance.n < 40){
@@ -74,17 +81,11 @@ int main (int argc, char const *argv[])
 		}
 		
 		cout << (bestSolution.isFeasible()?"FEASIBLE":"NOT FEASIBLE");
-		//t2 = clock();
-		//gettimeofday(&tv2, NULL);
+		
 
-		/* cout << "FROM solution: "; 
-		aSolution.print();
-		cout << "(value : " << tspSolver.evaluate(aSolution,tspInstance) << ")\n";
-		cout << "TO   solution: "; 
-		bestSolution.print();
-		cout << "(value : " << tspSolver.evaluate(bestSolution,tspInstance) << ")\n";
+		
 		cout << "in " << (double)(tv2.tv_sec+tv2.tv_usec*1e-6 - (tv1.tv_sec+tv1.tv_usec*1e-6)) << " seconds (user time)\n";
-		cout << "in " << (double)(t2-t1) / CLOCKS_PER_SEC << " seconds (CPU time)\n";*/
+		cout << "in " << (double)(t2-t1) / CLOCKS_PER_SEC << " seconds (CPU time)\n";
 
 	}
 	catch(exception& e)

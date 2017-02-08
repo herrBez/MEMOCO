@@ -28,7 +28,32 @@ class TSPSolution {
 	 */
 	TSPSolution(){
 	}
-  
+	
+	 
+  /**
+   * function that swap a and b in the tspsolution and calculate
+   * the new value of the solution in a constant time, using the fact
+   * that only two values are changed. (it is not necessary to perform the sum again)
+   * @param tsp the tsp problem instacnce containing the cost from point i to point j
+   * @param a the first index to swap
+   * @param b the second index to swap
+   * @return the calculated tsp solution
+   */
+  TSPSolution& swap(const TSP & tsp, int a, int b){
+	  value -= tsp.cost[sequence[a-1]][sequence[a]];
+	  value -= tsp.cost[sequence[a]][sequence[a+1]];
+	  value -= tsp.cost[sequence[b-1]][sequence[b]];
+	  value -= tsp.cost[sequence[b]][sequence[b+1]];
+	  int tmp = sequence[a];
+	  sequence[a] = sequence[b];
+	  sequence[b] = tmp;
+	  value += tsp.cost[sequence[a-1]][sequence[a]];
+	  value += tsp.cost[sequence[a]][sequence[a+1]];
+	  value += tsp.cost[sequence[b-1]][sequence[b]];
+	  value += tsp.cost[sequence[b]][sequence[b+1]];
+	  fitness = 1.0/value;
+	  return *this;
+  }
 	
 
   
