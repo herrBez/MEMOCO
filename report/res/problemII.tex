@@ -1,14 +1,17 @@
 \section{Second Assignment}
-In this second assignment the purpose was to implement a solution for the problem
+The second assignment consist in the implementation of a solution for the problem
 using a metaheuristic approach.
-I chose to use a genetic algorithm TODO aggiungi motivazoione
-\paragraph{Encoding of the individuals.} In order to encode the individuals I used the provided
-encoding, i.e. an array of dimension N+1 containing a sequence of holes index, e.g.
+I chose to use a genetic algorithm, because I think that I can reuse this algorithm
+in the future, because of its great flexibility.
+\paragraph{Encoding of the individuals.} In order to encode the individuals I used the suggested
+encoding, i.e. an array of dimension $N+1$ containing a sequence of holes index, e.g.
 $<0\ 1\ \dots\ N\ 0>$
-\paragraph{Initial Population.} The initial population is formed by $k$ individuals.
+
+\paragraph{Initial Population.} The initial population is formed by $S$ individuals.
 In order to diversify the population, fast all the individuals are chosen randomly, but
 the increasing sequence $<0\ 1\ \dots\ N\ 0>$ and the decreasing sequence $<0\ N\ \dots\ N\ 0>$
-are always granted. In order to start with better solution some of them are trained.
+are always granted, in order to have solutions with big distance. 
+In order to start with better solution some of them are trained with a random local search.
 
 \paragraph{Fitness Function.} For simplicity the fitness function is the inverse of the
 objective value.
@@ -19,25 +22,35 @@ mitigates the effect of the population substitution strategy, that
 saves only the best elements.
 
 \paragraph{Combination.} For the combination I used the ordering crossover with two randomly
-chosen cutting points. In order to perform this kind of crossover I use the
-\verb|std::map<int,int>| data-structure defined in the header \verb|<map>|. This data-structure
-has very good performance\footnote{http://en.cppreference.com/w/cpp/container/map} and most importantly it is sorted by key, i.e. the first element of the pair. 
+chosen cutting points. To perform this kind of crossover I adopted the
+\verb|std::map<int,int>| data-structure, defined in the header \verb|<map>|. This data-structure
+has very good performance\footnote{http://en.cppreference.com/w/cpp/container/map}, because it is based on RB-Tree
+and most importantly it is sorted by key, i.e. the first element of the pair.
+The efficiency of the Combination cannot be neglected, because this operator is used $R$ times in each
+iteration and in the worst case the size of the cut point can be very close to $N$.
+The usage inside the algorithm can be viewed in the file \verb|TSPSolverGA.h|. 
 
-\paragraph{Population Substitution.} During each iteration $R$ new individuals are created. Therefore
+\paragraph{Population Substitution.} During each iteration $R$ new individuals are created,
+and attached at the end of the population. Therefore
 the new population is of size $N+R$.
 Now the population is sorted in descending order according to the fitness value. 
 
 Since $R$ is much smaller than $N$ and the population
 at the start of the iteration is sorted, insertion sort algorithm
 is used. This works very efficiently (linearly) with inputs that are almost sorted.
-Instead the standard sort algorithm is (usually) quicksort that performs extremely poor with already sorted vectors $O(N+R)^2$.
-Therefore only the first $N$ elements are kept, discarding
-the last $R$ elements.
+Instead the standard sort algorithm is (usually) quicksort that performs extremely poor (in quadratic time) with already sorted vectors.
+
+After the sort operation only the $N$ best elements are kept, discarding the last $R$ elements.
 
 \paragraph{Stopping Criterion.} The algorithm terminates when it reaches 500 non improving iterations.
 The drawback of this approach is that it is not predictable when
-the algorithm will finish. In addition sometimes the improvements are so low that it is not worth to repeat other 500 iterations.
+the algorithm will finish. In addition sometimes the improvements are so low that it is not worth to repeat other 500 iterations, but
+otherwise it could happen that a few more iteration would have produce better result.
+The advantage w.r.t. the stop after a while is that it is not arbitrary.
 
-
+\paragraph{Finalization}
+At the end of the algorithm the first element of the population is returned. But first it is done
+a greedy local search on the best value in order to render it even better.
+Because he has already good characteristics, the local minimum could correspond with the optimal one.
 
 \subsection{Parameter calibration}

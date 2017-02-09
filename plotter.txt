@@ -1,4 +1,32 @@
 set terminal png
-set output 'benchmark_circle.png'
+set grid
+show grid
 
-plot '/tmp/benchmark_circle.txt' with linespoint
+set style line 1 linecolor rgb '#0060ad' linetype 1 linewidth 2
+set title "confrontation"
+set xlabel "N"
+set ylabel "time(s)"
+
+show xlabel
+show ylabel
+
+
+
+#set output '/tmp/benchmark_circle.png' 
+#plot '/tmp/benchmark_circle.txt' every ::1::30 with linespoint
+#set output '/tmp/benchmark_circle2.png'
+#plot '/tmp/benchmark_circle.txt' every ::30::50 with linespoint
+
+#set xrange [4:20]
+#set output '/tmp/benchmark_random_genetic_small.png'
+#plot '/tmp/benchmark_random_genetic.txt' title "genetic" with linespoint,\
+#     '/tmp/benchmark_random.txt'  title "exact" with linespoint 
+
+
+
+set xrange [4:50]
+set ytics(15, 30, 45, '1m' 60, 75, 90, '2m' 120, ' ' 150, '3m' 180, ' ' 210, '4m' 240, ' ' 270, '5m' 300)
+set output '/tmp/benchmark_circle.png'
+set title ""
+plot 'benchmark_circle.dat' title "exact" with linespoint,\
+#     '/tmp/benchmark_circle.txt'  title "exact" with linespoint 

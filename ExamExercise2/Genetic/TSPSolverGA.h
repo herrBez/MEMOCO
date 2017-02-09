@@ -19,14 +19,16 @@ using namespace std;
 
 class TSPSolverGA {
 private:
-	void localSearch(TSP tsp, TSPSolution & sol){
+
+	void localSearch(TSP tsp, TSPSolution & sol, int it=1000){
 		TSPSolution currSol (sol);
-		TSPSolution tmpSol (tsp);
-		for(int i = 0; i < 1000; i++){
+		TSPSolution tmpSol (sol);
+		for(int i = 0; i < it; i++){
+			tmpSol = currSol;
 			/* Finding a random neighbour by swapping 2 elements */
 			int a = 1 + (rand() % (tsp.n-1)); // Index between [1, n-1]
 			int b = 1 + (rand() % (tsp.n-1)); // Index between [1, n-1]
-			tmpSol = currSol.swap(tsp, a, b);
+			tmpSol.swap(tsp, a, b);
 			if(tmpSol.value < currSol.value)
 				currSol = tmpSol;
 		}
@@ -36,7 +38,7 @@ private:
 	void train(TSPSolution * sol, TSP tsp, const int R, double probability = 0.1){
 		for(int i = 0; i < R; i++){
 			double p = ((double) rand()) / RAND_MAX;
-			if(p < probability){
+			if(p <= probability){
 				localSearch(tsp, sol[i]);
 			}
 		}
@@ -214,9 +216,10 @@ public:
 	 * return a parent chosen with the montecarlo selection.
 	 * Sum is the sum of the fitnesses of the population.
 	 * @param population
+	 * @param R used only for N-tournament
 	 * @param sum
 	 */
-	int getParent(vector < TSPSolution > population , double sum, SelectionMethod s = SelectionMethod::MONTE_CARLO);
+	int getParent(vector < TSPSolution > population , int R, double sum, SelectionMethod s = SelectionMethod::MONTE_CARLO);
 	/**
 	 * performs the desired selection depending on the SelectionMethod given as parameter
 	 * @param population

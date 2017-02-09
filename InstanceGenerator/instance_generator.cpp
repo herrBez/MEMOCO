@@ -82,14 +82,13 @@ void printGerberFile(Point * p, const int N, const char * filename = "tsp_instan
      *X:5 digit in the integer part, 
      *Y:5digit in the fractional part 
 	 */
-	outfile << "%FSLAX52Y52*%" << endl; 
+	outfile << "%FSLAX66Y66*%" << endl; 
 	
 	outfile << "%MOMM*%" << endl; //set mm as unit
-	outfile << "%TF.FileFunction,Plated,1,8,PTH*%" << endl;
 	outfile << "%TF.Part,Single*%" << endl; //single pbc
 	outfile << "%LPD*%" << endl; //set polarity to dark
 	outfile << "%TA.AperFunction,Other,ComponentDrill*%" << endl; 
-	outfile << "%ADD11C,2.000*%" << endl; //size of hole is one mm
+	outfile << "%ADD11C,8.000*%" << endl; //size of hole is one mm
 	
 	outfile << "G01*" << endl;
 	outfile << "D11*" << endl;
@@ -460,7 +459,7 @@ void generateInstance(int N, char opt){
 	
 	sprintf(tmpBuffer, "tsp_instance_%d_%s", N, type);
 	printBinaryPBM(size, arr, N, tmpBuffer);
-	printGerberFile(arr, N, filename);
+	printGerberFile(arr, N, tmpBuffer);
 	cost = calculateDistance(N, arr);
 	printDatFile(cost, N, tmpBuffer);
 	delete[] arr;

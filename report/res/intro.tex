@@ -7,6 +7,7 @@ The aim of this project was to familiarize with different approaches for the sol
 	\item A metaheuristic: a genetic algorithm and simulated annealing were implemented. \ref{sec:problemII}
 \end{enumerate}
 \subsection{Problem description}
+\label{sec:problem}
 The assignment of the problem was the following:
 \begin{quote}
 	A company produces boards with holes used to build electric frames. Boards are positioned over a 
@@ -19,5 +20,12 @@ The assignment of the problem was the following:
 This problem can be viewed as a particular instance of the TSP problem: the salesman is represented by the 
 drill and the cities are represented by the holes.
 Since the problem is NP-hard, the exact method does not halt in a reasonable amount of time when $N$ increases, i.e. with inputs bigger than $60$.
+
+\paragraph{Notation} In the next sections the formalization of the assignment will be used, in particular $N$ refers to the
+number of the holes and $y_{ij}$ takes the value $1$ if the arc from $i$ to $j$
+is used otherwise $0$. During the rest of the report the expression \emph{the problem} will be used in order to reference.
+to the assignment.
+
+\paragraph{Structure} In the first part of the report the focus is put on instance creation, design choices of the first and second argument, particularly about the data-structures used, in the second part the attention is put on the performance and precision confrontation.
  
 

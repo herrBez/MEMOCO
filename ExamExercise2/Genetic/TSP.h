@@ -31,7 +31,7 @@ public:
     std::ifstream in(filename);
     // read size
     in >> n;
-    std::cout << "number of nodes n = " << n << std::endl;
+    //std::cout << "number of nodes n = " << n << std::endl;
     // read costs
     cost.resize(n);
     for (int i = 0; i < n; i++) {

@@ -290,7 +290,7 @@ double solve( CEnv env, Prob lp, int N, vector< vector<int> > mapY) {
 		CHECKED_CPX_CALL( CPXsolwrite, env, lp, "Model.sol");
 	}
 	if(benchmark){
-		printf("%4d %12.6f\n", N, cpu_time);//, user_time, objval);
+		printf("%4d\t%12.6f\t%12.6f\n", N, cpu_time, objval);//, user_time, objval);
 	} else {
 		cout << "Problem Size N" << N << endl;
 		cout << "in " << user_time << " seconds (user time)\n";

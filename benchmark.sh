@@ -1,6 +1,34 @@
 #!/bin/bash
-echo "Benchmark.."
-array=`seq 3 48`
+
+##
+## Argument 1 = function to execute Argument 2 = instance
+##
+
+
+function execute_ten_times_and_compute_average {	
+	avg=0
+	echo "# Exec " >> /tmp/benchmark_value.txt
+	for j in {1..10}; do 
+		echo "Doing ${i} - ${j}"
+		tmp=($(${1} ${2} ${3})) # >> benchmark_circle.txt
+		
+		echo ${tmp[1]}
+		echo ${tmp[2]} >> /tmp/benchmark_value.txt
+		avg=`echo "scale=6; $avg + ${tmp[1]}" | bc`
+	done
+	
+	avg=`echo "scale=6; $avg/10" | bc`
+	echo $avg
+}
+
+
+avgTSP12=`execute_ten_times_and_compute_average ./ExamExercise2/Genetic/main ./Sample/tsp12.dat -b `
+echo $avgTSP12
+avgTSP60=`execute_ten_times_and_compute_average ./ExamExercise2/Genetic/main ./Sample/tsp60.dat -b`
+echo $avgTSP60
+avgRealWorld=`execute_ten_times_and_compute_average ./ExamExercise2/Genetic/main ./Sample/RealWorldExample.dat -b`
+echo $avgRealWorld
+
 
 #rm tsp_instance_*_random.dat
 #rm tsp_instance_*_cirlce.dat
@@ -9,38 +37,29 @@ array=`seq 3 48`
 #rm benchmark_circle.txt
 
 #for i in $array; do
-#	#echo "Generating random instance with ${i} elements"
-#	#InstanceGenerator/instance_generator ${i} r 
+#	echo "Generating random instance with ${i} elements"
+#	InstanceGenerator/instance_generator ${i} r 
 #	echo "Generating instance with ${i} elements divided in 4 circles"
 #	InstanceGenerator/instance_generator ${i} c
 #done
 
-for i in {50..50}; do
-	echo "Generating instance with ${i} elements divided in 4 circles"
-	InstanceGenerator/instance_generator ${i} c
-done
+#for i in $array; do
+#	echo "Generating instance with ${i} elements divided in 4 circles"
+#	./InstanceGenerator/instance_generator ${i} r
+#done
 
-echo "set terminal png"
-for i in {50..50}; do 
+#array=`seq 40 40`
+#for i in $array; do 
 	#echo "Processing ${i} random"
 	#ExamExercise/main /tmp/tsp_instance_${i}_random.dat -b >> benchmark_random.txt
-	echo "Processing ${i} circle"
+#	echo "Processing ${i} circle"
 	
+#	avg=`execute_ten_times_and_compute_average ./ExamExercise2/Genetic/main /tmp/tsp_instance_${i}_circle.dat -b`
 	
-	avg=0
-	num=10
-	for j in {0..10}; do 
-		echo "Doing ${i} - ${j}"
-		tmp=( $(./ExamExercise/main /tmp/tsp_instance_${i}_circle.dat -b) ) # >> benchmark_circle.txt
-		echo ${tmp[1]}
-		
-		avg=`echo "scale=6; $avg + ${tmp[1]}" | bc`
-	done
-	avg=`echo "scale=6; $avg/$num" | bc`
-	echo "Average = $avg"
-	echo "${i} ${avg}" >> /tmp/benchmark_circle.txt
-	
-done 
+#	echo "Average = $avg"
+#	echo "${i} ${avg}" >> /tmp/benchmark_circle_genetic.txt
+#	
+#done 
 
-echo "output wrote in files : benchmark_random.txt, benchmark_circle.txt"
+#echo "output wrote in files : benchmark_random.txt, benchmark_circle.txt"
 echo "Done"

@@ -23,34 +23,41 @@ char errmsg[255];
  * @param argv
  * @return EXIT_SUCCESS on success, EXIT_FAILURE otherwise
  */
+bool benchmark = true;
 int main (int argc, char const *argv[])
 {
 	srand(time(NULL));
 	bool exc_raised = false;
 	try
 	{
-		if (argc < 3) throw runtime_error("Usage: %s filename.dat");  /// new parameters for TS
+		if (argc < 2) throw runtime_error("Usage: %s filename.dat <S>");  /// new parameters for TS
+		int S = 15; //Population size
 		
-
+		
+		
 		TSP tspInstance; 
 		tspInstance.read(argv[1]);
+		
+		if(S > tspInstance.n)
+			S = tspInstance.n;
 		
 		TSPSolverGA tspSolver;
 		//tspSolver.initRnd(aSolution);
 		vector < TSPSolution > initialPopulation;
-		int S = 15; //=POPULATION SIZE
+		
 		//It returns the initial population sorted by decreasing fitness
 		tspSolver.getInitPopulation(tspInstance, initialPopulation, S);
-
-		cout << "INIT POPULATION FITTEST = ";
-		if(tspInstance.n < 40){
-			initialPopulation[0].print();
-			cout << endl;
-		} else {
-			cout << "Init Best" << endl;
-			cout << "Objval" << initialPopulation[0].value << endl;
-			
-		}
+		
+		if(!benchmark){
+			cout << "INIT POPULATION FITTEST = ";
+			if(tspInstance.n < 40){
+				initialPopulation[0].print();
+				cout << endl;
+			} else {
+				cout << "Init Best" << endl;
+				cout << "Objval" << initialPopulation[0].value << endl;
+			}
+		} 
 		
 		
 		TSPSolution bestSolution(tspInstance);
@@ -68,23 +75,36 @@ int main (int argc, char const *argv[])
 		t2 = clock();
 		gettimeofday(&tv2, NULL);
 		
-		
-		if(tspInstance.n < 40){
-			cout << "BEST SOLUTION " << endl;
-			bestSolution.print();
-			cout << endl;
-		} else {
-			cout << "Best Solution" << endl;
-			cout << bestSolution.value << endl;
-			cout << bestSolution.fitness << endl;
+		if(!benchmark){
+			if(tspInstance.n < 40){
+				cout << "BEST SOLUTION " << endl;
+				bestSolution.print();
+				cout << endl;
+			} else {
+				cout << "Best Solution" << endl;
+				cout << bestSolution.value << endl;
+				cout << bestSolution.fitness << endl;
+			}
 		}
 		
-		cout << (bestSolution.isFeasible()?"FEASIBLE":"NOT FEASIBLE");
 		
-
 		
-		cout << "in " << (double)(tv2.tv_sec+tv2.tv_usec*1e-6 - (tv1.tv_sec+tv1.tv_usec*1e-6)) << " seconds (user time)\n";
-		cout << "in " << (double)(t2-t1) / CLOCKS_PER_SEC << " seconds (CPU time)\n";
+		//cout << (bestSolution.isFeasible()?"FEASIBLE":"NOT FEASIBLE");
+		
+		double user_time = (double)(tv2.tv_sec+tv2.tv_usec*1e-6 - (tv1.tv_sec+tv1.tv_usec*1e-6));
+		double cpu_time = (double)(t2-t1) / CLOCKS_PER_SEC;
+		
+		if(!benchmark){
+			cout << "in " << user_time << " seconds (user time)\n";
+			cout << "in " << cpu_time << " seconds (CPU time)\n";
+			cout << "Objval: " << bestSolution.value << endl;
+		
+		}
+		
+		
+		if(benchmark){
+			cout << tspInstance.n << "\t" << user_time << "\t" << bestSolution.value << endl;
+		}
 
 	}
 	catch(exception& e)
