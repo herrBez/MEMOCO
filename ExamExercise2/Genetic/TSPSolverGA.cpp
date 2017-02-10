@@ -149,7 +149,7 @@ bool TSPSolverGA::solve ( const TSP& tsp , vector< TSPSolution > & currPopulatio
 		}
 		delete[] newGen;
 	    delete[] setOfParents;
-	    if(intensification_counter == 2 && intensification)
+	    if(intensification_counter == 2)
 			break;
 	}
 	localSearch(tsp, currPopulation[0],1000);

@@ -95,7 +95,6 @@ public:
 	  value = value + tsp.cost[sequence[a]][sequence[a+1]];
 	  value = value + tsp.cost[sequence[b-1]][sequence[b]];
 	  value = value + tsp.cost[sequence[b]][sequence[b+1]];
-	  fitness = 1.0/value;
 	  return *this;
   }
 };
