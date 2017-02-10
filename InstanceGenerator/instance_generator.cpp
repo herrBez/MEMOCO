@@ -453,7 +453,7 @@ void generateInstance(int N, char opt){
 			arr = generateCircleInstance(N, size);
 			break;
 		default: 
-			
+			cerr << "Option not supported!" << endl;
 			exit(EXIT_FAILURE);
 	}
 	

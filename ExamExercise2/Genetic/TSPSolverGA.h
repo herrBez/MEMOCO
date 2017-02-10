@@ -44,14 +44,24 @@ private:
 		}
 	}
 	
+	/**
+	 * performs the substitution of the population preserving the best N elements if it is an intensification phase
+	 * otherwise it maintain the better 2 solutions and choose randomly the elements to keep.
+	 * @param currPopulation the current population
+	 * @param N the size of the population to keep
+	 * @param intensification true if it is an intensification phase, false otherwise 
+	 */
+	void substitution(vector < TSPSolution > & currPopulation, unsigned int N, bool intensification);
 	
-	void mutation(TSPSolution * sol, TSP tsp, int R, double probability = 0.1){
+	void mutation(TSPSolution * sol, TSP tsp, int R, double probability = 0.001){
 		for(int i = 0; i < R; i++){
 			double r = ((double)rand()) / RAND_MAX;
-			if(r < probability){
-				int a = (rand() % (tsp.n-2))+1;
-				int b = (rand() % (tsp.n-2))+1;
-				sol[i].swap(tsp, a, b);
+			for(int j = 0; j < tsp.n; j++){
+				if(r <= probability){
+					int a = (rand() % (tsp.n-2))+1;
+					int b = (rand() % (tsp.n-2))+1;
+					sol[i].swap(tsp, a, b);
+				}
 			}
 		}
 	}
@@ -115,7 +125,7 @@ private:
 	 * @param population 
 	 * @param k the size of the population
 	 */
-	int nTournamentSelection(vector < TSPSolution > population, int k) {
+	int nTournamentSelection(vector < TSPSolution > population, int k = 2) {
 
 		int N = population.size();
 		int parent = -1;
@@ -356,10 +366,10 @@ public:
 	 * @param TSP TSP data
 	 * @param currSol current solution
 	 * @param bestSol best found solution (output)
+	 * @param R the number of new solutions generated in each iteration
 	 * @return true id everything OK, false otherwise
 	 */
-	 bool solve ( const TSP& tsp , vector< TSPSolution > & currPopulation, TSPSolution& bestSol, unsigned int groupSize = 4,
-						   unsigned int variation = 10);
+	 bool solve ( const TSP& tsp , vector< TSPSolution > & currPopulation, TSPSolution& bestSol, int R = 4);
 
 };
 

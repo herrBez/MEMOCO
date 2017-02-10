@@ -15,7 +15,7 @@ function execute_ten_times_and_compute_average {
 		echo ${tmp[1]}
 		echo ${tmp[2]} >> /tmp/benchmark_value.txt
 		avg=`echo "scale=6; $avg + ${tmp[1]}" | bc`
-	done
+	doneq
 	
 	avg=`echo "scale=6; $avg/10" | bc`
 	echo $avg

@@ -33,13 +33,15 @@ int main (int argc, char const *argv[])
 		if (argc < 2) throw runtime_error("Usage: %s filename.dat <S>");  /// new parameters for TS
 		int S = 15; //Population size
 		
-		
+		if(argc >= 3){
+			S = (int) strtol(argv[2], NULL, 0);
+		}
 		
 		TSP tspInstance; 
 		tspInstance.read(argv[1]);
 		
-		if(S > tspInstance.n)
-			S = tspInstance.n;
+		
+		
 		
 		TSPSolverGA tspSolver;
 		//tspSolver.initRnd(aSolution);

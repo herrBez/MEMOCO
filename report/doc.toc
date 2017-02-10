@@ -3,34 +3,38 @@
 \contentsline {subsection}{\numberline {1.1}Problem description}{2}{subsection.1.1}
 \contentsline {paragraph}{Notation}{2}{section*.3}
 \contentsline {paragraph}{Structure}{2}{section*.4}
-\contentsline {section}{\numberline {2}Instance Creation}{3}{section.2}
-\contentsline {subsection}{\numberline {2.1}Provided}{3}{subsection.2.1}
-\contentsline {subsection}{\numberline {2.2}Gerber File}{3}{subsection.2.2}
+\contentsline {section}{\numberline {2}Instance Creation}{4}{section.2}
+\contentsline {subsection}{\numberline {2.1}Provided Instances}{4}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}Gerber File}{4}{subsection.2.2}
 \contentsline {subsection}{\numberline {2.3}Instance Generator}{4}{subsection.2.3}
-\contentsline {section}{\numberline {3}First Assignment}{5}{section.3}
-\contentsline {paragraph}{Variables and constraints}{5}{section*.5}
-\contentsline {paragraph}{Note about Data-Structure}{5}{section*.6}
-\contentsline {section}{\numberline {4}Second Assignment}{6}{section.4}
-\contentsline {paragraph}{Encoding of the individuals.}{6}{section*.7}
-\contentsline {paragraph}{Initial Population.}{6}{section*.8}
-\contentsline {paragraph}{Fitness Function.}{6}{section*.9}
-\contentsline {paragraph}{Selection.}{6}{section*.10}
-\contentsline {paragraph}{Combination.}{6}{section*.11}
-\contentsline {paragraph}{Population Substitution.}{6}{section*.12}
-\contentsline {paragraph}{Stopping Criterion.}{7}{section*.13}
-\contentsline {paragraph}{Finalization}{7}{section*.14}
-\contentsline {subsection}{\numberline {4.1}Parameter calibration}{7}{subsection.4.1}
-\contentsline {section}{\numberline {5}Result}{8}{section.5}
-\contentsline {subsection}{\numberline {5.1}Result - First Assignment}{8}{subsection.5.1}
-\contentsline {paragraph}{CIRCLE3-50}{8}{section*.15}
-\contentsline {paragraph}{RANDOM3-50}{8}{section*.16}
-\contentsline {paragraph}{TSP12, TSP60, RealWorld}{8}{section*.17}
-\contentsline {section}{\numberline {6}Result - Second Assignment}{10}{section.6}
-\contentsline {section}{\numberline {7}Result-Second Assignment}{10}{section.7}
-\contentsline {subsection}{\numberline {7.1}Performance}{10}{subsection.7.1}
-\contentsline {subsection}{\numberline {7.2}Quality of the result}{10}{subsection.7.2}
-\contentsline {section}{\numberline {8}Comparison between Solution I and Solution II}{10}{section.8}
-\contentsline {section}{\numberline {9}Usage}{11}{section.9}
-\contentsline {paragraph}{First Assignment}{11}{section*.18}
-\contentsline {paragraph}{Second Assignment}{11}{section*.19}
-\contentsline {section}{\numberline {10}Conclusion}{12}{section.10}
+\contentsline {section}{\numberline {3}First Assignment}{6}{section.3}
+\contentsline {paragraph}{Variables generation}{6}{section*.7}
+\contentsline {paragraph}{Note about particular Data-Structures}{6}{section*.8}
+\contentsline {section}{\numberline {4}Second Assignment}{7}{section.4}
+\contentsline {paragraph}{Encoding of the individuals.}{7}{section*.9}
+\contentsline {paragraph}{Initial Population.}{7}{section*.10}
+\contentsline {paragraph}{Fitness Function.}{7}{section*.11}
+\contentsline {paragraph}{Selection.}{7}{section*.12}
+\contentsline {paragraph}{Combination.}{7}{section*.13}
+\contentsline {paragraph}{Intensification and Diversification}{7}{section*.14}
+\contentsline {paragraph}{Population Substitution.}{8}{section*.15}
+\contentsline {paragraph}{Stopping Criterion.}{8}{section*.16}
+\contentsline {paragraph}{Finalization}{8}{section*.17}
+\contentsline {subsection}{\numberline {4.1}Parameter calibration}{8}{subsection.4.1}
+\contentsline {section}{\numberline {5}Result}{9}{section.5}
+\contentsline {subsection}{\numberline {5.1}Benchmark description}{9}{subsection.5.1}
+\contentsline {section}{\numberline {6}Result - First Assignment}{10}{section.6}
+\contentsline {paragraph}{CIRCLE3-50}{10}{section*.18}
+\contentsline {paragraph}{RANDOM3-50}{10}{section*.19}
+\contentsline {paragraph}{TSP12, TSP60, RealWorld}{10}{section*.20}
+\contentsline {paragraph}{Random100a, Random100b}{10}{section*.21}
+\contentsline {paragraph}{Considerations.}{10}{section*.24}
+\contentsline {section}{\numberline {7}Result-Second Assignment}{12}{section.7}
+\contentsline {paragraph}{Note about the tuning of the algorithm}{12}{section*.25}
+\contentsline {section}{\numberline {8}Comparison between Solution I and Solution II}{13}{section.8}
+\contentsline {subsection}{\numberline {8.1}Quality of the result}{13}{subsection.8.1}
+\contentsline {section}{\numberline {9}Usage/Practical Notes}{14}{section.9}
+\contentsline {paragraph}{First Assignment}{14}{section*.30}
+\contentsline {paragraph}{Second Assignment}{14}{section*.31}
+\contentsline {paragraph}{Program Documentation}{14}{section*.32}
+\contentsline {section}{\numberline {10}Conclusion}{15}{section.10}

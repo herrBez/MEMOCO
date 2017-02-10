@@ -68,11 +68,24 @@ int TSPSolverGA::getParent(vector < TSPSolution > population, int R, double sum,
 }
 
 
+void TSPSolverGA::substitution(vector < TSPSolution > & currPopulation, unsigned int N, bool intensification){
+	if(intensification){
+		/* removing the worst values */
+		while(currPopulation.size() != N){
+			currPopulation.pop_back();
+		}
+	} else {
+		int maintainGoodSolution = 2;
+		while(currPopulation.size() != N){
+			currPopulation.erase(currPopulation.begin() + maintainGoodSolution + (rand()%currPopulation.size()));
+		}
+	}	
+	
+}
 
 
-
-bool TSPSolverGA::solve ( const TSP& tsp , vector< TSPSolution > & currPopulation, TSPSolution& bestSol, unsigned int groupSize,
-						   unsigned int variation) {
+bool TSPSolverGA::solve ( const TSP& tsp , vector< TSPSolution > & currPopulation, TSPSolution& bestSol,
+						   int R) {
 	
 	unsigned int N = currPopulation.size();	
 	if(tsp.n <= 3){
@@ -81,15 +94,15 @@ bool TSPSolverGA::solve ( const TSP& tsp , vector< TSPSolution > & currPopulatio
 		return true;
 	}
 	int nonImprovingIterations = 0;
-	int R = ceil(sqrt(N));
+	R = (int)ceil(sqrt(N));
 	if(R % 2 == 1) // Render R multiple of 2
 		R++;
+
 	double bestValue = currPopulation[0].value;
 
 	int it = 0;
 	bool intensification = false;
 	int intensification_counter = 0;
-	//int  intensification_count = 0;
 	while(nonImprovingIterations < 500) { //Stopping criterion
 		it++;
 		int * setOfParents = NULL;
@@ -105,10 +118,13 @@ bool TSPSolverGA::solve ( const TSP& tsp , vector< TSPSolution > & currPopulatio
 		
 		if(!intensification){
 			/* Perform some mutation in order to maintain the diversity */
-			mutation(newGen, tsp, R, 0.3);
+			mutation(newGen, tsp, R, 0.2);
 		} else {
+			
+			mutation(newGen, tsp, R, 0.001);
 			/* Perform a local search on some randomly choosen individuals */
 			train(newGen, tsp, R, 0.02);
+			
 		}
 		/* Add the children to the population */
 		for(int i = 0; i < R; i++){
@@ -119,26 +135,22 @@ bool TSPSolverGA::solve ( const TSP& tsp , vector< TSPSolution > & currPopulatio
 		 * It is based upon the assumption that R << N*/		
 		insertionSortPopulation(currPopulation);
 		
-		
-		/* removing the worst values */
-		while(currPopulation.size() != N){
-			currPopulation.pop_back();
-		}
+		substitution(currPopulation, N, intensification);
 		
 		nonImprovingIterations++;
 		if(bestValue != currPopulation[0].value){
 			bestValue = currPopulation[0].value;
 			nonImprovingIterations = 0;
 		}
-		if(nonImprovingIterations == 499 && intensification_counter < 3){
+		if(nonImprovingIterations == 499){
 			nonImprovingIterations = 0;
 			intensification = !intensification;
 			intensification_counter++;
-			if(intensification_counter == 4)
-				break;
 		}
 		delete[] newGen;
 	    delete[] setOfParents;
+	    if(intensification_counter == 2 && intensification)
+			break;
 	}
 	localSearch(tsp, currPopulation[0],1000);
 	bestSol = currPopulation[0];

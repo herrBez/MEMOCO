@@ -2,13 +2,13 @@
 \section{Introduction}
 The aim of this project was to familiarize with different approaches for the solution of a well-known combinatorial problem, especially:
 \begin{enumerate}
-	\item An exact solution using the CPLEX API \ref{sec:problemI}
+	\item An exact solution using the CPLEX API, henceforward referred as problem I, first assignment or exact method (See chapter \ref{sec:problemI}).
 	
-	\item A metaheuristic: a genetic algorithm and simulated annealing were implemented. \ref{sec:problemII}
+	\item A metaheuristic approach: a genetic algorithm, from now on referred as problem II, second assignment or genetic algorithm (See chapter \ref{sec:problemII}).
 \end{enumerate}
 \subsection{Problem description}
 \label{sec:problem}
-The assignment of the problem was the following:
+The combinatorial problem to solve was the following:
 \begin{quote}
 	A company produces boards with holes used to build electric frames. Boards are positioned over a 
 	machines and a drill moves over the board, stops at the desired positions
@@ -19,13 +19,23 @@ The assignment of the problem was the following:
 \end{quote}
 This problem can be viewed as a particular instance of the TSP problem: the salesman is represented by the 
 drill and the cities are represented by the holes.
-Since the problem is NP-hard, the exact method does not halt in a reasonable amount of time when $N$ increases, i.e. with inputs bigger than $60$.
+Since the problem is NP-hard, the exact method does not halt in a reasonable amount of time when $N$ increases.
+
 
 \paragraph{Notation} In the next sections the formalization of the assignment will be used, in particular $N$ refers to the
 number of the holes and $y_{ij}$ takes the value $1$ if the arc from $i$ to $j$
-is used otherwise $0$. During the rest of the report the expression \emph{the problem} will be used in order to reference.
-to the assignment.
+is used otherwise $0$. During the rest of the report the expression \emph{the problem} will be used in order to refer
+to the given assignment.
 
-\paragraph{Structure} In the first part of the report the focus is put on instance creation, design choices of the first and second argument, particularly about the data-structures used, in the second part the attention is put on the performance and precision confrontation.
+\paragraph{Structure} The primary focus
+of the first part of the report concerns with obtaining of instances, in particular with the automatic instance
+generation. Then follow two chapters about the design choices of the first and second assignment, especially about
+particular data-structures used. Afterward the attention is put on:
+\begin{itemize}
+	\item the performance of the two algorithms,
+	\item the stability of the genetic algorithm 
+	\item the quality of the solution provided by this algorithm.
+\end{itemize}
+Finally follow a note about the programs usage and the conclusion.
  
 

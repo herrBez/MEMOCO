@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/TeX Live for SUSE Linux) (format=pdflatex 2014.11.7)  9 FEB 2017 16:27
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/TeX Live for SUSE Linux) (format=pdflatex 2014.11.7)  10 FEB 2017 16:27
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -433,7 +433,7 @@ Now handling font encoding PD1 ...
    defining Unicode char U+2122 (decimal 8482)
    defining Unicode char U+2423 (decimal 9251)
 ))
-Package hyperref Info: Option `colorlinks' set `true' on input line 13.
+Package hyperref Info: Option `colorlinks' set `true' on input line 12.
 
 (/usr/share/texmf/tex/latex/amsmath/amsmath.sty
 Package: amsmath 2013/01/14 v2.14 AMS math features
@@ -521,6 +521,30 @@ Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
 LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
 )
+(/usr/share/texmf/tex/latex/caption/subcaption.sty
+Package: subcaption 2013/02/03 v1.1-62 Sub-captions (AR)
+
+(/usr/share/texmf/tex/latex/caption/caption.sty
+Package: caption 2013/05/02 v3.3-89 Customizing captions (AR)
+
+(/usr/share/texmf/tex/latex/caption/caption3.sty
+Package: caption3 2013/05/02 v1.6-88 caption3 kernel (AR)
+Package caption3 Info: TeX engine: e-TeX on input line 57.
+\captionmargin=\dimen118
+\captionmargin@=\dimen119
+\captionwidth=\dimen120
+\caption@tempdima=\dimen121
+\caption@indent=\dimen122
+\caption@parindent=\dimen123
+\caption@hangindent=\dimen124
+)
+Package caption Info: KOMA-Script document class.
+\c@ContinuedFloat=\count111
+Package caption Info: hyperref package is loaded.
+)
+\c@subfigure=\count112
+\c@subtable=\count113
+)
 
 LaTeX Warning: Unused global option(s):
     [openany].
@@ -528,20 +552,20 @@ LaTeX Warning: Unused global option(s):
 (./doc.aux)
 \openout1 = `doc.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 22.
-LaTeX Font Info:    ... okay on input line 22.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 22.
-LaTeX Font Info:    ... okay on input line 22.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 22.
-LaTeX Font Info:    ... okay on input line 22.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 22.
-LaTeX Font Info:    ... okay on input line 22.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 22.
-LaTeX Font Info:    ... okay on input line 22.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 22.
-LaTeX Font Info:    ... okay on input line 22.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 22.
-LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
 \AtBeginShipoutBox=\box29
  (/usr/share/texmf/tex/latex/graphics/color.sty
 Package: color 2005/11/14 v1.0j Standard LaTeX Color (DPC)
@@ -551,7 +575,7 @@ File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
 )
 Package color Info: Driver file: pdftex.def on input line 130.
 )
-Package hyperref Info: Link coloring ON on input line 22.
+Package hyperref Info: Link coloring ON on input line 29.
 
 (/usr/share/texmf/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
@@ -559,11 +583,11 @@ Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
 (/usr/share/texmf/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
-\c@section@level=\count111
+\c@section@level=\count114
 )
-LaTeX Info: Redefining \ref on input line 22.
-LaTeX Info: Redefining \pageref on input line 22.
-LaTeX Info: Redefining \nameref on input line 22.
+LaTeX Info: Redefining \ref on input line 29.
+LaTeX Info: Redefining \pageref on input line 29.
+LaTeX Info: Redefining \nameref on input line 29.
  (./doc.out)
 (./doc.out)
 \@outlinefile=\write3
@@ -571,16 +595,16 @@ LaTeX Info: Redefining \nameref on input line 22.
 
  (/usr/share/texmf/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count112
-\scratchdimen=\dimen118
+\scratchcounter=\count115
+\scratchdimen=\dimen125
 \scratchbox=\box30
-\nofMPsegments=\count113
-\nofMParguments=\count114
+\nofMPsegments=\count116
+\nofMParguments=\count117
 \everyMPshowfont=\toks22
-\MPscratchCnt=\count115
-\MPscratchDim=\dimen119
-\MPnumerator=\count116
-\makeMPintoPDFobject=\count117
+\MPscratchCnt=\count118
+\MPscratchDim=\dimen126
+\MPnumerator=\count119
+\makeMPintoPDFobject=\count120
 \everyMPtoPDFconversion=\toks23
 ) (/usr/share/texmf/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
@@ -597,12 +621,14 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-LaTeX Font Info:    Try loading font information for U+msa on input line 24.
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: End \AtBeginDocument code.
+LaTeX Font Info:    Try loading font information for U+msa on input line 31.
 
 (/usr/share/texmf/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 24.
+LaTeX Font Info:    Try loading font information for U+msb on input line 31.
 
 (/usr/share/texmf/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -615,114 +641,131 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
 {/usr/share/texmf/fonts/map/pdftex/updmap/pdftex.map}] (./res/abstract.tex) (./
 res/intro.tex
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 35.
 
-LaTeX Warning: Reference `sec:problemI' on page 2 undefined on input line 5.
-
-
-LaTeX Warning: Reference `sec:problemII' on page 2 undefined on input line 7.
-
-) [2] (./res/InstanceGeneration.tex
-Overfull \hbox (1.51051pt too wide) in paragraph at lines 10--18
+(/usr/share/texmf/tex/latex/base/omscmr.fd
+File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 35.
+) [2] [3]
+(./res/InstanceGeneration.tex
+Overfull \hbox (1.51051pt too wide) in paragraph at lines 11--15
 \OT1/cmtt/m/n/10.95 com / files / downloads / file / 81 / the _ gerber _ file _
  format _ specification . pdf$[][]\OT1/cmr/m/n/10.95 . This
  []
 
-<img/real_world.png, id=115, 662.475pt x 500.87125pt>
+<img/real_world.png, id=122, 662.475pt x 500.87125pt>
 File: img/real_world.png Graphic file (type png)
  <use img/real_world.png>
-Package pdftex.def Info: img/real_world.png used on input line 27.
+Package pdftex.def Info: img/real_world.png used on input line 30.
 (pdftex.def)             Requested size: 198.74403pt x 150.26253pt.
 
-[3 <./img/real_world.png>]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 37.
- (/usr/share/texmf/tex/latex/base/omscmr.fd
-File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
-)
-LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 37.
-)
-[4] (./res/problemI.tex) [5] (./res/problemII.tex
-Overfull \hbox (6.7749pt too wide) in paragraph at lines 24--32
-\OT1/cmr/m/n/10.95 cho-sen cut-ting points. To per-form this kind of crossover 
-I adopted the []\OT1/cmtt/m/n/10.95 std::map<int,int>
- []
+[4] <img/square.png, id=140, 642.4pt x 642.4pt>
+File: img/square.png Graphic file (type png)
+ <use img/square.png>
+Package pdftex.def Info: img/square.png used on input line 63.
+(pdftex.def)             Requested size: 147.74889pt x 147.74889pt.
 
-[6]) [7] (./res/result.tex
-<img/benchmark_circle.png, id=167, 481.8pt x 361.35pt>
+<img/circle.png, id=141, 642.4pt x 642.4pt>
+File: img/circle.png Graphic file (type png)
+ <use img/circle.png>
+Package pdftex.def Info: img/circle.png used on input line 64.
+(pdftex.def)             Requested size: 147.74889pt x 147.74889pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+) [5 <./img/real_world.png>] (./res/problemI.tex) [6 <./img/square.png> <./img/
+circle.png>] (./res/problemII.tex [7]) [8] (./res/result.tex [9]
+<img/benchmark_circle.png, id=193, 481.8pt x 361.35pt>
 File: img/benchmark_circle.png Graphic file (type png)
 
 <use img/benchmark_circle.png>
-Package pdftex.def Info: img/benchmark_circle.png used on input line 45.
-(pdftex.def)             Requested size: 192.71658pt x 144.53743pt.
+Package pdftex.def Info: img/benchmark_circle.png used on input line 67.
+(pdftex.def)             Requested size: 167.29967pt x 125.47089pt.
 
-<img/firstAssignment/RANDOMTSPINSTANCE.png, id=168, 481.8pt x 361.35pt>
+<img/firstAssignment/RANDOMTSPINSTANCE.png, id=194, 481.8pt x 361.35pt>
 File: img/firstAssignment/RANDOMTSPINSTANCE.png Graphic file (type png)
 
 <use img/firstAssignment/RANDOMTSPINSTANCE.png>
 Package pdftex.def Info: img/firstAssignment/RANDOMTSPINSTANCE.png used on inpu
-t line 46.
-(pdftex.def)             Requested size: 192.71658pt x 144.53743pt.
- [8] [9 <./img/benchmark_circle.png> <./img/firstAssignment/RANDOMTSPINSTANCE.p
-ng>]
-<img/confronto_random_exact_genetic.png, id=186, 481.8pt x 361.35pt>
-File: img/confronto_random_exact_genetic.png Graphic file (type png)
+t line 72.
+(pdftex.def)             Requested size: 167.29967pt x 125.47089pt.
 
-<use img/confronto_random_exact_genetic.png>
-Package pdftex.def Info: img/confronto_random_exact_genetic.png used on input l
-ine 82.
-(pdftex.def)             Requested size: 240.8994pt x 180.67456pt.
+<img/TSPRANDOM100a-bTIme.png, id=195, 602.25pt x 372.39125pt>
+File: img/TSPRANDOM100a-bTIme.png Graphic file (type png)
 
-<img/confronto_circle_exact_genetic.png, id=187, 481.8pt x 361.35pt>
+<use img/TSPRANDOM100a-bTIme.png>
+Package pdftex.def Info: img/TSPRANDOM100a-bTIme.png used on input line 84.
+(pdftex.def)             Requested size: 188.21371pt x 116.37766pt.
+
+<img/firstAssignment/TSP60RealWorld.png, id=196, 602.25pt x 372.39125pt>
+File: img/firstAssignment/TSP60RealWorld.png Graphic file (type png)
+
+<use img/firstAssignment/TSP60RealWorld.png>
+Package pdftex.def Info: img/firstAssignment/TSP60RealWorld.png used on input l
+ine 89.
+(pdftex.def)             Requested size: 188.21371pt x 116.37766pt.
+ [10 <./img/benchmark_circle.png> <./img/firstAssignment/RANDOMTSPINSTANCE.png>
+] [11 <./img/TSPRANDOM100a-bTIme.png> <./img/firstAssignment/TSP60RealWorld.png
+>] [12]
+<img/confronto_circle_exact_genetic.png, id=230, 481.8pt x 361.35pt>
 File: img/confronto_circle_exact_genetic.png Graphic file (type png)
 
 <use img/confronto_circle_exact_genetic.png>
 Package pdftex.def Info: img/confronto_circle_exact_genetic.png used on input l
-ine 87.
-(pdftex.def)             Requested size: 240.8994pt x 180.67456pt.
-) [10 <./img/confronto_random_exact_genetic.png>] (./res/ProgramUsage.tex) [11 
-<./img/confronto_circle_exact_genetic.png>] (./res/conclusion.tex)
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 40.
- [12]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 40.
+ine 178.
+(pdftex.def)             Requested size: 202.35461pt x 151.76596pt.
+
+<img/confronto_random_exact_genetic.png, id=231, 481.8pt x 361.35pt>
+File: img/confronto_random_exact_genetic.png Graphic file (type png)
+
+<use img/confronto_random_exact_genetic.png>
+Package pdftex.def Info: img/confronto_random_exact_genetic.png used on input l
+ine 179.
+(pdftex.def)             Requested size: 202.35461pt x 151.76596pt.
+) [13 <./img/confronto_circle_exact_genetic.png> <./img/confronto_random_exact_
+genetic.png>]
+(./res/ProgramUsage.tex)
+Overfull \hbox (6.60478pt too wide) in paragraph at lines 27--45
+[] []\OT1/cmss/bx/n/10.95 Program Doc-u-men-ta-tion[][] \OT1/cmr/m/n/10.95 In t
+he pro-gram fold-ers you can also find a file named []\OT1/cmtt/m/n/10.95 Doxyf
+ile
+ []
+
+[14] (./res/conclusion.tex)
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 47.
+ [15]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 47.
  (./doc.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 40.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 40.
-
-
-Package rerunfilecheck Warning: File `doc.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `doc.out':
-(rerunfilecheck)             Before: A58FF7A4264EE099FB41C3385558255D;982
-(rerunfilecheck)             After:  610B2EF1786674604ECF172CE2D64BCA;1064.
-
-LaTeX Warning: There were undefined references.
-
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 40.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 47.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 47.
+Package rerunfilecheck Info: File `doc.out' has not changed.
+(rerunfilecheck)             Checksum: 46341111E9C97C0F970E47FE0E2F5BB8;1024.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 47.
  ) 
 Here is how much of TeX's memory you used:
- 7355 strings out of 493315
- 107894 string characters out of 6145893
- 216563 words of memory out of 5000000
- 10626 multiletter control sequences out of 15000+600000
- 15380 words of font info for 60 fonts, out of 8000000 for 9000
+ 8442 strings out of 493315
+ 127986 string characters out of 6145893
+ 242822 words of memory out of 5000000
+ 11689 multiletter control sequences out of 15000+600000
+ 15072 words of font info for 59 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
- 38i,8n,47p,334b,385s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texmf/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texmf
-/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf/fonts/type1/public
-/amsfonts/cm/cmmi8.pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmr10.p
-fb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf
-/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texmf/fonts/type1/public/a
-msfonts/cm/cmr8.pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmr9.pfb><
-/usr/share/texmf/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/share/texmf/
-fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf/fonts/type1/public/
-amsfonts/cm/cmti10.pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmtt10.
-pfb>
-Output written on doc.pdf (12 pages, 201054 bytes).
+ 48i,9n,52p,322b,504s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/share/texmf/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf
+/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texmf/fonts/type1/public/
+amsfonts/cm/cmr10.pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmr12.pf
+b></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texmf/f
+onts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texmf/fonts/type1/public/ams
+fonts/cm/cmr9.pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmssbx10.pfb
+></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf/
+fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texmf/fonts/type1/public/
+amsfonts/cm/cmtt10.pfb>
+Output written on doc.pdf (15 pages, 234665 bytes).
 PDF statistics:
- 264 PDF objects out of 1000 (max. 8388607)
- 225 compressed objects within 3 object streams
- 61 named destinations out of 1000 (max. 500000)
- 162 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 315 PDF objects out of 1000 (max. 8388607)
+ 266 compressed objects within 3 object streams
+ 75 named destinations out of 1000 (max. 500000)
+ 182 words of extra memory for PDF output out of 10000 (max. 10000000)
 

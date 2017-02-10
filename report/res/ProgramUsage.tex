@@ -1,20 +1,27 @@
-\section{Usage}
+\section{Usage/Practical Notes}
 In this section the usage of the programs are briefly described.
 See section \ref{sec:Gerber} for the generation of instances from files in gerber format.
 Details about the usage of the instance generator can be found in section \ref{sec:instance:generator}.
 \paragraph{First Assignment}
 In order to compile the first assignment a \verb|Makefile| is provided.
 After the compilation the file \verb|main| is created. It needs an instance
-in \verb|.dat| file format, in which the first line contains $N$, and the 
-remaining $N$ contains $N$ entries in which the entry $i$, $j$ represent the distance
+in \verb|.dat| file format that can be found in folder \verb|/Sample|, in which the first line contains $N$.
+The remaining $N$ rows contain $N$ entries in which the value $(i, j)$ represents the distance
 from drill point $i$ to drill point $j$.
+The program can be run with the following command:
 \begin{verbatim}
 ./main <tsp_instance.dat> [OPT]
 \end{verbatim}
 In order to view the available options you can use the \verb|--help|  option.
-The only option that is worth it to mention here is the \verb|--benchmark| option that
-suppress useless messages and format the output, so that the \verb|benchmark.sh| can write
-the information in a text file that can be plotted using \verb|gnuplot|.
+The only option that is worth it to mention here is the \verb|--benchmark| one.
+This causes the suppression of useless messages and formats the output as well.
 
 \paragraph{Second Assignment}
- 
+The solution for the second assignment can be found inside the \verb|/ExamExercise2/Genetic| folder. 
+A \verb|Makefile| is provided. The program can be run with following command:
+\begin{verbatim}
+./main <tsp_instance.dat> [Population Size]
+\end{verbatim}
+Optionally one can specify the population size as a third argument.
+\paragraph{Program Documentation}
+In the program folders you can also find a file named \verb|Doxyfile| that can be used to generate the documentation of the programs using the tool \verb|Doxygen|.

@@ -1,7 +1,28 @@
 \section{Conclusion}
-It turns out that CPLEX with problem size
-bigger than 45 becomes very slow. 
-For instance with a circle problem of size 64 I stopped
-the program after 42 minutes.
-From my point of view one of the most interesting test
-was the real-world test.
+Inside this report it was shown that CPLEX can work
+very efficiently with small instances and random instances
+in general. 
+During the measures it turns out evident the CPLEX perfoms
+in general worse and in an unpredictable way, when the holes are cluestered in the corners 
+of the board. 
+
+The tuning and analysis of the efficiency and stability of the population based solution was extremely
+simplified by fixing the majority of the parameters. 
+The genetic algorithm is very fast and provides a solution in brief time even if the input is big, especially
+when the population size is set to 10. 
+With the increasing of the problem size the precision of the genetic algorithm becomes worse and worse.
+
+In general I can state  that with a little problem size it does not make sense to write and try to optimize
+a genetic algorithm.
+
+I assume that a company that produces PBCs will replicate the given board millions of time. Considering that, even if it will take a lot of time to the producer to get the exact solution the first time, at the end they will be much faster. The initial investment will pay off rapidly.
+
+In general this kind of companies do not produce boards with several hundreds of holes, but more likely with less than 100\footnote{At least in the real world example.}.
+The user time reported refers to a five years old laptop, but a company can surely rely on a better hardware.
+
+
+ 
+
+
+
+

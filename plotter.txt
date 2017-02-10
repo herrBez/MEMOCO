@@ -5,7 +5,7 @@ show grid
 set style line 1 linecolor rgb '#0060ad' linetype 1 linewidth 2
 set title "confrontation"
 set xlabel "N"
-set ylabel "time(s)"
+set ylabel "time"
 
 show xlabel
 show ylabel
@@ -25,8 +25,8 @@ show ylabel
 
 
 set xrange [4:50]
-set ytics(15, 30, 45, '1m' 60, 75, 90, '2m' 120, ' ' 150, '3m' 180, ' ' 210, '4m' 240, ' ' 270, '5m' 300)
+set ytics(30, '1m' 60, 90, '2m' 120, ' ' 150, '3m' 180, ' ' 210, '4m' 240, ' ' 270, '5m' 300)
 set output '/tmp/benchmark_circle.png'
 set title ""
-plot 'benchmark_circle.dat' title "exact" with linespoint,\
+plot 'benchmark_circle.txt' title "exact" with linespoint,\
 #     '/tmp/benchmark_circle.txt'  title "exact" with linespoint 
