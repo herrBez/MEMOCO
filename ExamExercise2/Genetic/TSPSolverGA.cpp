@@ -84,8 +84,7 @@ void TSPSolverGA::substitution(vector < TSPSolution > & currPopulation, unsigned
 }
 
 
-bool TSPSolverGA::solve ( const TSP& tsp , vector< TSPSolution > & currPopulation, TSPSolution& bestSol,
-						   int R) {
+bool TSPSolverGA::solve ( const TSP& tsp , vector< TSPSolution > & currPopulation, TSPSolution& bestSol) {
 	
 	unsigned int N = currPopulation.size();	
 	if(tsp.n <= 3){
@@ -94,7 +93,7 @@ bool TSPSolverGA::solve ( const TSP& tsp , vector< TSPSolution > & currPopulatio
 		return true;
 	}
 	int nonImprovingIterations = 0;
-	R = (int)ceil(sqrt(N));
+	int R = (int)ceil(sqrt(N));
 	if(R % 2 == 1) // Render R multiple of 2
 		R++;
 

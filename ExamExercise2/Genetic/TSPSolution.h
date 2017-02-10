@@ -40,6 +40,7 @@ class TSPSolution {
    * @return the calculated tsp solution
    */
   TSPSolution& swap(const TSP & tsp, int a, int b){
+	 
 	  value -= tsp.cost[sequence[a-1]][sequence[a]];
 	  value -= tsp.cost[sequence[a]][sequence[a+1]];
 	  value -= tsp.cost[sequence[b-1]][sequence[b]];

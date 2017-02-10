@@ -37,10 +37,10 @@ private:
 	
 	void train(TSPSolution * sol, TSP tsp, const int R, double probability = 0.1){
 		for(int i = 0; i < R; i++){
-			double p = ((double) rand()) / RAND_MAX;
-			if(p <= probability){
+			//double p = ((double) rand()) / RAND_MAX;
+			//if(p <= probability){
 				localSearch(tsp, sol[i]);
-			}
+			//}
 		}
 	}
 	
@@ -369,7 +369,7 @@ public:
 	 * @param R the number of new solutions generated in each iteration
 	 * @return true id everything OK, false otherwise
 	 */
-	 bool solve ( const TSP& tsp , vector< TSPSolution > & currPopulation, TSPSolution& bestSol, int R = 4);
+	 bool solve ( const TSP& tsp , vector< TSPSolution > & currPopulation, TSPSolution& bestSol);
 
 };
 
