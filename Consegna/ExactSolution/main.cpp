@@ -385,6 +385,7 @@ int main (int argc, char *argv[])
 	bool exc_arised = false;
 	try { 
 		
+		//In order to enable "random" generation of numbers
 		vector< vector<double> > C = get_option(argc, argv);	
 		int N = C.size();
 		vector< vector<int> > mapY(N, vector<int> (N));
